@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.windmill.newspapers.mapper.NewspapersMapper">
-
+    <!-- 查询所有新闻 -->
+    <select id="findNewspaper" parameterType="com.windmill.newspapers.pojo.Newspaper" resultType="com.windmill.newspapers.pojo.Newspaper">
+          SELECT * FROM t_news
+          <where>
+              <if test="newsId != null">
+                  AND news_id = #{newsId}
+              </if>
+          </where>
+    </select>
+    <!-- 添加新闻 -->
+    <insert id="createNewspaper" parameterType="com.windmill.newspapers.pojo.Newspaper">
+        INSERT INTO t_news(news_note,news_title)  VALUE (#{newsNote},#{newsTitle})
+    </insert>
+    <!-- 修改新闻 -->
+    <update id="updateNewspaper" parameterType="com.windmill.newspapers.pojo.Newspaper">
+        UPDATE t_news SET news_note = #{newsNote},news_title = #{newsTitle} WHERE news_id = #{newsId}
+    </update>
+    <!-- 删除新闻 -->
+    <delete id="delNewspaper" parameterType="com.windmill.newspapers.pojo.Newspaper">
+        DELETE FROM t_news WHERE news_id = #{newsId}
+    </delete>
 </mapper>

@@ -1,7 +1,10 @@
 package com.windmill.newspapers.controller;
 
+import com.windmill.newspapers.pojo.Newspaper;
 import com.windmill.newspapers.service.NewspapersService;
+import com.windmill.utils.ResultUtil;
 import com.windmill.utils.Uploader;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,5 +46,76 @@ public class NewspapersController {
         }else{
             return "<script>"+ callback +"(" + result + ")</script>";
         }
+    }
+    /**
+     * @作者: 段大神经
+     * @功能描述: 根据id查询新闻内容
+     * @时间: 2019/3/21 20:02
+     * @参数:  * @param newspaper
+     * @返回值: com.windmill.newspapers.pojo.Newspaper
+     **/
+    @RequestMapping("getNewspaperById")
+    public Newspaper getNewspaperById(Newspaper newspaper){
+        return newspapersService.getNewspaperById(newspaper);
+    }
+    /**
+     * @作者: 段大神经
+     * @功能描述: 添加新闻
+     * @时间: 2019/3/21 20:17
+     * @参数:  * @param newspaper
+     * @返回值: com.windmill.utils.ResultUtil
+     **/
+    @RequestMapping("createNewspaper")
+    public ResultUtil createNewspaper(Newspaper newspaper){
+        if (StringUtils.isBlank(newspaper.getNewsNote())){
+            return ResultUtil.builder().code("2").msg("内容为空").build();
+        }
+        if (StringUtils.isBlank(newspaper.getNewsTitle())){
+            return ResultUtil.builder().code("2").msg("标题为空").build();
+        }
+        int i = newspapersService.createNewspaper(newspaper);
+        if (i > 0){
+            return ResultUtil.builder().code("1").build();
+        }
+        return ResultUtil.builder().code("2").msg("添加失败").build();
+    }
+    /**
+     * @作者: 段大神经
+     * @功能描述: 修改新闻
+     * @时间: 2019/3/21 20:20
+     * @参数:  * @param newspaper
+     * @返回值: com.windmill.utils.ResultUtil
+     **/
+    @RequestMapping("updateNewspaper")
+    public ResultUtil updateNewspaper(Newspaper newspaper){
+        if (StringUtils.isBlank(newspaper.getNewsNote())){
+            return ResultUtil.builder().code("2").msg("内容为空").build();
+        }
+        if (StringUtils.isBlank(newspaper.getNewsTitle())){
+            return ResultUtil.builder().code("2").msg("标题为空").build();
+        }
+        int i = newspapersService.updateNewspaper(newspaper);
+        if (i > 0){
+            return ResultUtil.builder().code("1").build();
+        }
+        return ResultUtil.builder().code("2").msg("修改失败").build();
+    }
+    /**
+     * @作者: 段大神经
+     * @功能描述: 删除新闻
+     * @时间: 2019/3/21 20:23
+     * @参数:  * @param newspaper
+     * @返回值: com.windmill.utils.ResultUtil
+     **/
+    @RequestMapping("delNewspaper")
+    public ResultUtil delNewspaper(Newspaper newspaper){
+        if (newspaper.getNewsId() == null && newspaper.getNewsId() == 0){
+            return ResultUtil.builder().code("2").msg("新闻id为空").build();
+        }
+        int i = newspapersService.delNewspaper(newspaper);
+        if (i > 0){
+            return ResultUtil.builder().code("1").build();
+        }
+        return ResultUtil.builder().code("2").msg("删除失败").build();
     }
 }

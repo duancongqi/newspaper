@@ -18,4 +18,8 @@ public class Newspaper {
      * 内容
      */
     private String  newsNote;
+    /**
+     * 标题
+     */
+    private String  newsTitle;
 }
