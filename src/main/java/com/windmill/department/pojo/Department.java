@@ -1,7 +1,10 @@
 package com.windmill.department.pojo;
 
+import com.windmill.newspapers.pojo.Newspaper;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 /**
  * @类名称：Department
@@ -31,4 +34,8 @@ public class Department {
      * 部门图片流
      */
     private MultipartFile depImg;
+    /**
+     * 新闻集合
+     */
+    private List<Newspaper> newspapers;
 }
