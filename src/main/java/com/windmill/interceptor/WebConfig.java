@@ -22,7 +22,7 @@ public class WebConfig implements WebMvcConfigurer {
                 //拦截配置
                 .addPathPatterns("/**")
                 .excludePathPatterns(
-               "/js/**","/images/**","/toLogin","/login"
+               "/js/**","/images/**","/login","/index"
         )
         ;
     }

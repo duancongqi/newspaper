@@ -20,7 +20,7 @@ public class MyInterceptor implements HandlerInterceptor {
 
         Object login_user = request.getSession().getAttribute("user");
         if (login_user == null) {
-            response.sendRedirect("/toLogin");
+            response.sendRedirect("/index");
             return false;
         }
         return true;
