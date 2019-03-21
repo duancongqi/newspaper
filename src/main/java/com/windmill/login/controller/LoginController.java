@@ -8,6 +8,7 @@ import com.windmill.utils.Page;
 import com.windmill.utils.ResultUtil;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -91,5 +92,21 @@ public class LoginController {
         List<User> list = loginService.getUserByWhere(user);
         PageInfo<User> pageInfo = new PageInfo<>(list);
         return ResultUtil.multidata(list,pageInfo.getTotal());
+    }
+    /**
+     * @作者: 段大神经
+     * @功能描述: 根据id查询用户，用于修改回显
+     * @时间: 2019/3/21 19:10
+     * @参数:  * @param user
+     * @返回值: com.windmill.login.pojo.User
+     **/
+    @RequestMapping("getUserByUserId")
+    public User getUserByUserId(User user){
+        List<User> list = loginService.getUserByWhere(user);
+        User user1 = null;
+        if (!CollectionUtils.isEmpty(list)){
+            user1 = list.get(0);
+        }
+        return user1;
     }
 }
