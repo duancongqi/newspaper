@@ -1,5 +1,9 @@
 package com.windmill.checkwork.mapper;
 
+import com.windmill.checkwork.pojo.CheckWork;
+
+import java.util.List;
+
 /**
  * @接口名称：ChekEorkMapper
  * @作者: 段大神经
@@ -7,4 +11,11 @@ package com.windmill.checkwork.mapper;
  * @说明:
  */
 public interface CheckWorkMapper {
+    void createCheckWork(CheckWork checkWork);
+
+    List<CheckWork> findCheckWorkByWhere(CheckWork checkWork);
+
+    List findCheckWorkByNow();
+
+    int updateCheckWork(CheckWork checkWork);
 }

@@ -1,6 +1,7 @@
 package com.windmill.department.pojo;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @类名称：Department
@@ -23,7 +24,11 @@ public class Department {
      */
     private String depFunction;
     /**
-     * 部门图片
+     * 部门图片地址
      */
     private String depPhoto;
+    /**
+     * 部门图片流
+     */
+    private MultipartFile depImg;
 }

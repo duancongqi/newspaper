@@ -1,5 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.windmill.login.mapper.LoginMapper">
-
+    <!-- 条件查询用户 -->
+    <select id="getUserByWhere" parameterType="com.windmill.login.pojo.User" resultType="com.windmill.login.pojo.User">
+        SELECT * FROM t_user
+        <where>
+            <if test="userId != null and userId != 0">
+                AND user_id = #{userId}
+            </if>
+            <if test="userName != null">
+                AND user_name = #{userName}
+            </if>
+            <if test="userPassword != null">
+                AND user_password = #{userPassword}
+            </if>
+        </where>
+    </select>
+    <!-- 修改用户 -->
+    <update id="updateUser" parameterType="com.windmill.login.pojo.User">
+        UPDATE t_user SET user_name = #{userName},user_password = #{userPassword},
+        user_sex = #{userSex},stu_numb = #{user_numb},user_class = #{userClass},
+        user_phone = #{userPhone},dep_name = #{depName},user_qq = #{userQq}
+        WHERE user_id = #{userId}
+    </update>
+    <!-- 添加用户 -->
+    <insert id="createUser" parameterType="com.windmill.login.pojo.User">
+        INSERT INTO t_user(user_name,user_password,user_sex,stu_numb,user_class,user_phone,dep_name,user_qq)
+        VALUE (#{userName},#{userPassword},#{userSex},#{user_numb},#{userClass},#{userPhone},#{depName},#{userQq})
+    </insert>
+    <!-- 根据id删除用户 -->
+    <delete id="delUserByUserId" parameterType="integer">
+        DELETE FROM t_user WHERE user_id = #{userId}
+    </delete>
 </mapper>

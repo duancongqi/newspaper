@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.windmill.checkwork.mapper.CheckWorkMapper">
-
+    <!-- 一键考勤 -->
+    <insert id="createCheckWork" parameterType="com.windmill.checkwork.pojo.CheckWork">
+        INSERT INTO t_checkwork(dep_name,user_name,is_arrive,cw_createtime)
+        VALUE (#{depName},#{userName},#{isArrive},NOW())
+    </insert>
+    <!-- 条件查询所有考勤 -->
+    <select id="findCheckWorkByWhere" parameterType="com.windmill.checkwork.pojo.CheckWork" resultType="com.windmill.checkwork.pojo.CheckWork">
+        SELECT * FROM t_checkwork 
+        <where>
+            <if test="userName != null">
+              AND  user_name = #{userName}
+            </if>
+        </where>
+        ORDER BY cw_id DESC
+    </select>
+    <!-- 查询今天是否已经打卡 -->
+    <select id="findCheckWorkByNow" resultType="com.windmill.checkwork.pojo.CheckWork">
+        SELECT * FROM t_checkwork WHERE to_days(cw_createtime) = to_days(now());
+    </select>
+    <!-- 修改考勤 -->
+    <update id="updateCheckWork" parameterType="com.windmill.checkwork.pojo.CheckWork">
+        UPDATE t_checkwork SET is_arrive = #{isArrive} WHERE cw_id = #{cwId}
+    </update>
 </mapper>

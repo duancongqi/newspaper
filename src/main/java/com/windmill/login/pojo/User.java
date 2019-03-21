@@ -19,6 +19,10 @@ public class User {
      */
     private String userName;
     /**
+     * 密码
+     */
+    private String userPassword;
+    /**
      * 用户性别 0:男；1：女
      */
     private Integer userSex;

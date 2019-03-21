@@ -2,6 +2,9 @@ package com.windmill.checkwork.pojo;
 
 import lombok.Data;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 /**
  * @类名称：CheckWork
  * @作者: 段大神经
@@ -26,5 +29,13 @@ public class CheckWork {
      * 是否考勤  0未到，1已到
      */
     private String isArrive;
+    /**
+     * 用户id集合
+     */
+    private List userIds;
+    /**
+     * 创建时间
+     */
+    private LocalDateTime cwCreateTime;
 
 }
