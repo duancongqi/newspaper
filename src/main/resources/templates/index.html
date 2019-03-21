@@ -6,7 +6,200 @@
     <!-- 引入核心js,css文件 -->
     <footer th:replace="common/jscore" />
 </head>
-<body>
-民大it首页
+<style>
+    div.row {
+        border-top:1px solid #000
+    }
+    div {
+        text-align: center
+    }
+    .img {
+        width: 300px;
+        height: 300px;
+    }
+    a:hover,a:focus{
+        outline: none;
+        text-decoration: none;
+    }
+    .tab .nav-tabs{
+        position: relative;
+        border-bottom: none;
+    }
+    .tab .nav-tabs li{
+        text-align: center;
+        margin-right: 10px;
+    }
+    .tab .nav-tabs li a{
+        display: block;
+        font-size: 16px;
+        font-weight: 600;
+        color: #444;
+        padding: 10px 15px;
+        background: transparent;
+        margin-right: 0;
+        border: none;
+        border-radius: 0;
+        overflow: hidden;
+        position: relative;
+        z-index: 1;
+        transition: all 0.5s ease 0s;
+    }
+    .tab .nav-tabs li a:before{
+        content: "";
+        width: 100%;
+        height: 3px;
+        background: #de7921;
+        position: absolute;
+        top: 92%;
+        left: 0;
+        transition: all 0.3s ease 0s;
+    }
+    .tab .nav-tabs li a:hover:before,
+    .tab .nav-tabs li.active a:before,
+    .tab .nav-tabs li.active a:hover:before{
+        top: 0;
+    }
+    .tab .nav-tabs li a:after{
+        content: "";
+        width: 100%;
+        height: 100%;
+        background: #fff;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: -1;
+        transition: all 0.3s ease 0s;
+    }
+    .tab .nav-tabs li a:hover:after,
+    .tab .nav-tabs li.active a:after,
+    .tab .nav-tabs li.active a:hover:after{
+        top: 0;
+    }
+    .nav-tabs li.active a,
+    .nav-tabs li.active a:focus,
+    .nav-tabs li.active a:hover,
+    .nav-tabs li a:hover{
+        border: none;
+    }
+    .tab .tab-content{
+        padding: 30px 15px 20px;
+        background: #fff;
+        font-size: 14px;
+        color: #555;
+        line-height: 26px;
+    }
+    .tab .tab-content h3{
+        font-size: 24px;
+        margin-top: 0;
+    }
+    @media only screen and (max-width: 479px){
+        .tab .nav-tabs li{ width: 100%; }
+    }
+    #wrap {
+        display:block;
+        bottom:20px;
+        right:100px
+        !important;
+        width:80px;
+        line-height:30px;
+        position:fixed;
+        border:1px solid #fff;
+        text-align:center;
+        color:#fff;
+        background:#000;
+    }
+</style>
+<body style="width: 80%;margin-left: 10%;">
+<div style="border: 1px">
+        <div class="" style="height: 10%">
+            <h1>民大IT报</h1>
+        </div>
+
+        <hr>
+
+        <div class="" style="height: 300px;overflow:hidden;">
+            <ul class="nav nav-tabs nav-justified" >
+                <li role="presentation" class="active"><a href="#one" role="tab" data-toggle="tab">首页</a></li>
+                <li role="presentation"><a href="#two" role="tab" data-toggle="tab">职能部门</a></li>
+                <li role="presentation"><a href="#three" role="tab" data-toggle="tab">报社概况</a></li>
+            </ul>
+
+            <div class="tab-content tabs">
+                <div role="tabpanel" class="tab-pane fade in active" id="one" >
+                    <img src="http://www.runoob.com/wp-content/uploads/2014/07/slide2.png" alt="Second slide">
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="two">
+                    <div id="myCarousel" class="carousel slide">
+                        <!-- 轮播（Carousel）指标 -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#myCarousel" data-slide-to="1"></li>
+                            <li data-target="#myCarousel" data-slide-to="2"></li>
+                        </ol>
+                        <!-- 轮播（Carousel）项目 -->
+                        <div class="carousel-inner">
+                            <div class="item active">
+                            <center>
+                                <img class="img" src="http://www.runoob.com/wp-content/uploads/2014/07/slide2.png" alt="First slide">
+                            </center>
+                                <!--<div class="carousel-caption">标题 1</div>-->
+                            </div>
+                            <div class="item">
+                                <center>
+                                    <img class="img" src="http://www.runoob.com/wp-content/uploads/2014/07/slide2.png" alt="Second slide">
+                                </center>
+                                <!--<div class="carousel-caption">标题 2</div>-->
+                            </div>
+                            <div class="item">
+                                <center>
+                                <img class="img" src="http://www.runoob.com/wp-content/uploads/2014/07/slide3.png" alt="Third slide">
+                                </center>
+                                <!--<div class="carousel-caption">标题 3</div>-->
+                            </div>
+                        </div>
+                        <!-- 轮播（Carousel）导航 -->
+                        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="three" >
+                    <h3>Section 3</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec urna aliquam, ornare eros vel, malesuada lorem. Nullam faucibus lorem at eros consectetur lobortis. Maecenas nec nibh congue, placerat sem id, rutrum velit. Phasellus porta enim at facilisis condimentum. Maecenas pharetra dolor vel elit tempor pellentesque sed sed eros. Aenean vitae mauris tincidunt, imperdiet orci semper, rhoncus ligula. Vivamus scelerisque.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="height: 40%">
+            <h4 style="float: left;margin-top: 20px;margin-left: 20px">往期报纸</h4>
+            <div style="float: left;margin-top: 50px;margin-left: 20px">
+
+                <ul><a>邓小平理论</a></ul>
+                <ul><a>三个实践，重要理论</a></ul>
+                <ul><a>sad1f321as23f123as123df123sd</a></ul>
+                <ul><a>sad1f321as23f123as123df123sd</a></ul>
+                <ul><a>sad1f321as23f123as123df123sd</a></ul>
+                <ul><a>sad1f321as23f123as123df123sd</a></ul>
+                <ul><a>sad1f321as23f123as123df123sd</a></ul>
+
+            </div>
+        </div>
+        <hr style="border: 5px;background: #0f0f0f">
+        <div style="height: 10%">
+            <div style="" id="wrap" >
+                <img id="" src="2.jpg" alt="Second slide" height="80px" width="80px">
+            </div>
+        </div>
+</div>
 </body>
+<script>
+    $('#myCarousel').carousel({
+        interval: 5000
+    })
+</script>
 </html>
