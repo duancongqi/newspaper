@@ -1,5 +1,47 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.windmill.department.mapper.DepartmentMapper">
-
+    <resultMap id="departmentMap" type="com.windmill.department.pojo.Department">
+        <id property="depId" column="dep_id"></id>
+        <result property="depFunction" column="dep_function"></result>
+        <result property="depName" column="dep_name"></result>
+        <result property="depPhoto" column="dep_photo"></result>
+        <collection property="newspapers" ofType="com.windmill.newspapers.pojo.Newspaper">
+            <id property="newsId" column="news_id"></id>
+            <result property="newsNote" column="news_note"></result>
+            <result property="newsTitle" column="news_title"></result>
+        </collection>
+    </resultMap>
+    <!-- 查询所有部门 -->
+    <select id="findDepartment" resultType="com.windmill.department.pojo.Department">
+        SELECT * FROM t_dapartment
+    </select>
+    <!-- 添加部门 -->
+    <insert id="createDepartment" parameterType="com.windmill.department.pojo.Department" >
+      INSERT INTO t_dapartment(dep_name,dep_function,dep_photo) VALUE (#{depName},#{depFunction},#{depPhoto})
+    </insert>
+    <!-- 修改部门 -->
+    <update id="updateDepartment" parameterType="com.windmill.department.pojo.Department">
+      UPDATE t_dapartment SET dep_name = #{depName},dep_function = #{depFunction},dep_photo = #{depPhoto} WHERE dep_id #{depId}
+    </update>
+    <!-- 删除部门 -->
+    <delete id="delDepartment" parameterType="com.windmill.department.pojo.Department">
+      DELETE FROM t_dapartment WHERE dep_id #{depId}
+    </delete>
+    <!-- 根据id获取部门信息以及部门下得新闻 -->
+    <select id="getDepartmentById" parameterType="integer" resultMap="departmentMap">
+      SELECT
+        d.dep_id,
+        d.dep_name,
+        d.dep_function,
+        d.dep_photo,
+        n.news_id,
+        n.news_note,
+        n.news_title
+      FROM
+        t_dapartment d
+      LEFT JOIN t_depnewsrelation l ON d.dep_id = l.dep_id
+      LEFT JOIN t_news n ON n.news_id = l.news_id
+      WHERE d.dep_id = #{depId}
+    </select>
 </mapper>
