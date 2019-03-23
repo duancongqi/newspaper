@@ -18,4 +18,6 @@ public interface NewspapersMapper {
     int updateNewspaper(Newspaper newspaper);
 
     int delNewspaper(Newspaper newspaper);
+
+    List<Newspaper> getNewspaper();
 }

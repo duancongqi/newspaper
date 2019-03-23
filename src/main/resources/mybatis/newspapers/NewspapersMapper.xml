@@ -10,6 +10,10 @@
               </if>
           </where>
     </select>
+    <!--取出所有标题-->
+    <select id="getNewspaper" parameterType="com.windmill.newspapers.pojo.Newspaper" resultType="com.windmill.newspapers.pojo.Newspaper">
+        SELECT * FROM t_news
+    </select>
     <!-- 添加新闻 -->
     <insert id="createNewspaper" parameterType="com.windmill.newspapers.pojo.Newspaper">
         INSERT INTO t_news(news_note,news_title)  VALUE (#{newsNote},#{newsTitle})
