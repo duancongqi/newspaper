@@ -22,11 +22,11 @@
     </insert>
     <!-- 修改部门 -->
     <update id="updateDepartment" parameterType="com.windmill.department.pojo.Department">
-      UPDATE t_dapartment SET dep_name = #{depName},dep_function = #{depFunction},dep_photo = #{depPhoto} WHERE dep_id #{depId}
+      UPDATE t_dapartment SET dep_name = #{depName},dep_function = #{depFunction},dep_photo = #{depPhoto} WHERE dep_id = #{depId}
     </update>
     <!-- 删除部门 -->
     <delete id="delDepartment" parameterType="com.windmill.department.pojo.Department">
-      DELETE FROM t_dapartment WHERE dep_id #{depId}
+      DELETE FROM t_dapartment WHERE dep_id = #{depId}
     </delete>
     <!-- 根据id获取部门信息以及部门下得新闻 -->
     <select id="getDepartmentById" parameterType="integer" resultMap="departmentMap">
