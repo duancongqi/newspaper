@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/editorjs">
+    <meta charset="UTF-8">
+    <title>新闻添加页面</title>
+</head>
+<body>
+    <label>标题:</label>
+    <input type="text"  class="form-control" id="add_News_title" >
+    <label>正文:</label>
+    <div type="text/plain" id="add_News_Editor"></div>
+    <script type="text/javascript">
+        var newsAddEditor = UM.getEditor('add_News_Editor');
+        function chenckAddNewsForm() {
+            var newsText = newsAddEditor.getPlainTxt();
+            if ($("#add_News_title").val()==""){
+                alert("标题为空");
+                return false;
+            }
+            else if (newsText == "" ){
+                alert("内容为空");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>

@@ -2,12 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>新闻添加页面</title>
-    <link th:href="@{/ueditor/themes/default/css/umeditor.css}" rel="stylesheet">
-    <script type="text/javascript" th:src="@{/ueditor/third-party/jquery.min.js}"></script>
-    <script type="text/javascript" th:src="@{/ueditor/umeditor.config.js}"></script>
-    <script type="text/javascript" th:src="@{/ueditor/umeditor.js}"></script>
-    <script type="text/javascript" th:src="@{/ueditor/lang/zh-cn/zh-cn.js}"></script>
+    <title>新闻修改页面</title>
+    <head th:replace="common/editorjs" />
 </head>
 <body>
     <script type="text/plain" id="add_editor"></script>
