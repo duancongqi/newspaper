@@ -7,21 +7,21 @@
 </head>
 <body>
 <div id="toolbar">
-    <button class="btn btn-success" type="button" onclick="addDepartment()">
+    <button class="btn btn-success" type="button" onclick="addUser()">
         <i class="glyphicon glyphicon-plus">
         </i>新增
     </button>
 </div>
-<table id="departmentTable"></table>
+<table id="userTable"></table>
 </body>
 <script type="text/javascript">
-    $("#departmentTable").bootstrapTable({
+    $("#userTable").bootstrapTable({
         url:"/findUser",
         contentType : "application/x-www-form-urlencoded",//必须的否则条件查询时会乱码
         //查询参数：条件查询时使用
         toolbar:'#toolbar',
         pagination:true, //是否展示分页
-        pageList:[5, 10],//分页组件
+        pageList:[5, 10,15],//分页组件
         pageNumber:1,
         pageSize:5,//默认每页条数
         method:'get',//发送请求的方式
@@ -48,16 +48,152 @@
              }},
             {field:'stuNumb',title:'学号',align:'center',width:500},
             {field:'userClass',title:'所在班级',align:'center',width:500},
-            {field:'userPhone',title:'部门职能',align:'center',width:500},
+            {field:'userPhone',title:'成员电话',align:'center',width:500},
             {field:'depName',title:'所在部门',align:'center',width:500},
             {field:'userQq',title:'成员QQ',align:'center',width:500},
             {field:'cc',title:'操作',align:'center',width:350,formatter:function(value,rows,index){
                     var str="";
-                    str+="<button class='btn btn-info dim' type='button' onclick='delDepartment(\""+rows.depId+"\")' ><i class='fa fa-paste'></i>删除</button>"+"  ";
-                    str+="<button class='btn btn-info dim' type='button' onclick='updateDepartment(\""+rows.depId+"\")' ><i class='fa fa-paste'></i>修改</button>";
+                    str+="<button class='btn btn-info dim' type='button' onclick='delUser(\""+rows.userId+"\")' ><i class='fa fa-paste'></i>删除</button>"+"  ";
+                    str+="<button class='btn btn-info dim' type='button' onclick='updateDepartment(\""+rows.userId+"\")' ><i class='fa fa-paste'></i>修改</button>";
                     return  str;
                 }
             }]
     })
+    function addUser(){
+        BootstrapDialog.show({
+            title:"添加用户",
+            closable: false,
+            message:$('<div><div>').load('/toInsertUser'),
+            buttons:[{
+                label:"提交",
+                cssClass:'btn-primary',
+                action:function(dialogItself){
+                    var adduserflag = chenckAddUserForm();
+                    if (!adduserflag){
+                        return;
+                    }
+                    var id = $("#userId").val();
+                    var username = $("#userName").val();
+                    var userpassword = $("#userPassword").val();
+                    var usersex = $("#userSex").val();
+                    var userclass = $("#userClass").val();
+                    var stunumb = $("#stuNumb").val()
+                    var userphone = $("#userPhone").val();
+                    var depname = $("#depName").val();
+                    var userqq = $("#userQq").val();
+                    $.ajax({
+                        url:"/createUser",
+                        data:{
+                            "userId":id,
+                            "userName":username,
+                            "userPassword":userpassword,
+                            "userSex":usersex,
+                            "userClass":userclass,
+                            "stuNumb":stunumb,
+                            "userPhone":userphone,
+                            "depName":depname,
+                            "userQq":userqq
+                        },
+                        dataType:"text",
+                        type:"post",
+                        success:function(date){
+                            dialogItself.close();
+                            $("#userTable").bootstrapTable('refresh',{pageNumber:1});
+                        },
+                        error:function(){
+                            BootstrapDialog.show({
+                                title:"fuck！！",
+                                message:'哇哦！系统走丢了！！'
+                            })
+                        }
+                    })
+                }
+            },{
+                label:"取消",
+                cssClass:'btn-warning',
+                action:function(data){
+                    data.close();
+                }
+            }]
+        })
+    }
+    function updateDepartment(id){
+        BootstrapDialog.show({
+            title:"修改用户",
+            closable: false,
+            message:$('<div><div>').load('/toUpdUser?userId='+id),
+            buttons:[{
+                label:"提交",
+                cssClass:'btn-primary',
+                action:function(dialogItself){
+                    var adduserflag = chenckupdUserForm();
+                    if (!adduserflag){
+                        return;
+                    }
+                    var id = $("#userId").val();
+                    var username = $("#userName").val();
+                    var userpassword = $("#userPassword").val();
+                    var usersex = $("#userSex").val();
+                    var userclass = $("#userClass").val();
+                    var stunumb = $("#stuNumb").val()
+                    var userphone = $("#userPhone").val();
+                    var depname = $("#depName").val();
+                    var userqq = $("#userQq").val();
+                    $.ajax({
+                        url:"/updateUser",
+                        data:{
+                            "userId":id,
+                            "userName":username,
+                            "userPassword":userpassword,
+                            "userSex":usersex,
+                            "userClass":userclass,
+                            "stuNumb":stunumb,
+                            "userPhone":userphone,
+                            "depName":depname,
+                            "userQq":userqq
+                        },
+                        dataType:"text",
+                        type:"post",
+                        success:function(date){
+                            dialogItself.close();
+                            $("#userTable").bootstrapTable('refresh',{pageNumber:1});
+                        },
+                        error:function(){
+                            BootstrapDialog.show({
+                                title:"fuck！！",
+                                message:'哇哦！系统走丢了！！'
+                            })
+                        }
+                    })
+                }
+            },{
+                label:"取消",
+                cssClass:'btn-warning',
+                action:function(data){
+                    data.close();
+                }
+            }]
+        })
+    }
+    //删除成员
+    function delUser(id){
+        if(id != ""){
+            $.ajax({
+                url:'/delUserByUserId',
+                type:'post',
+                data:{
+                    userId:id
+                },
+                dataType:'json',
+                success:function(data){
+                    if (data) {
+                        $("#userTable").bootstrapTable('refresh',{pageNumber:1});
+                    }else {
+                        bootbox.alert('删除数据失败');
+                    }
+                }
+            })
+        }
+    }
 </script>
 </html>

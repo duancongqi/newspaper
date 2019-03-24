@@ -1,0 +1,81 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加成员页面</title>
+</head>
+<body>
+    <form id="addUserForm">
+        <label>成员姓名:</label>
+        <input type="text" name="userName" class="form-control" id="userName" >
+        <label>密码:</label>
+        <input type="text" name="userPassword" class="form-control" id="userPassword">
+        <label>性别:</label>
+        <select class="form-control" name="jurisdiction" id="userSex">
+            <option value="">请选择</option>
+            <option value="0">男</option>
+            <option value="1">女</option>
+        </select>
+        <label>学号:</label>
+        <input type="text" name="stuNumb" class="form-control" id="stuNumb">
+        <label>所在班级:</label>
+        <input type="text" name="userClass" class="form-control" id="userClass">
+        <label>电话:</label>
+        <input type="text" name="userPhone" class="form-control" id="userPhone">
+        <label>所在部门</label>
+        <select class="form-control" name="jurisdiction" id="depName">
+            <option value="">请选择</option>
+        </select>
+        <label>QQ号：</label>
+        <input type="text" name="userQq" class="form-control" id="userQq">
+    </form>
+</body>
+<script type="text/javascript">
+    $(function (){
+        $.ajax({
+            url:"/selectDepartment",
+            dataType:"json",
+            type:"get",
+            success:function(data){
+                for (var i = 0;i < data.length;i++){
+                    $("#depName").append("<option value='"+data[i].depName+"'>"+data[i].depName+"</option>");
+                }
+            }
+        })
+    })
+    function chenckAddUserForm() {
+        if ($("#userName").val()==""){
+            alert("用户名不能为空!")
+            return false;
+        }
+        else if ($("#userPassword").val()== "") {
+            alert("密码不能为空!");
+            return false;
+        }
+        else if ($("#userSex").val()=="" ){
+            alert("请选择性别!")
+            return false;
+        }
+        else if ($("#stuNumb").val()==""){
+            alert("学号不能为空!")
+            return false;
+        }
+        else if ($("#userClass").val()==""){
+            alert("班级不能为空!")
+            return false;
+        }
+        else if($("#userPhone").val()==""){
+            alert("电话不能为空!")
+            return false;
+        }
+        else if($("#depName").val()==""){
+            alert("请选择部门!")
+            return false;
+        }
+        else if ($("#userQq").val()==""){
+            alert("请输入QQ号!")
+            return false;
+        }
+        return true;
+    }
+</script>
+</html>

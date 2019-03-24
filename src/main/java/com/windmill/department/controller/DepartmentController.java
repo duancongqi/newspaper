@@ -37,13 +37,10 @@ public class DepartmentController {
      **/
     @RequestMapping("findDepartment")
     public Map<String,Object> findDepartment(Page page){
-        Map<String,Object> map = new HashedMap();
         PageHelper.startPage(page.getPage(),page.getLimit());
         List departmentList = departmentService.findDepartment();
         PageInfo<Department> departmentListPage = new PageInfo<>(departmentList);
-        map.put("total",departmentListPage.getTotal());
-        map.put("rows",departmentList);
-        return map;
+        return ResultUtil.multidata(departmentList,departmentListPage.getTotal());
     }
     /**
      * @作者: 段大神经
@@ -127,5 +124,17 @@ public class DepartmentController {
     @RequestMapping("getDepartmentById")
     public Department getDepartmentById(@RequestParam Integer depId){
         return departmentService.getDepartmentById(depId);
+    }
+    /**
+     * @作者: 老西儿
+     * @功能描述: 查询所有部门
+     * @时间: 2019/3/24 16:01
+     * @参数:  * @param
+     * @返回值: java.util.List
+     **/
+    @RequestMapping("selectDepartment")
+    public List selectDepartment(){
+        List departmentList = departmentService.findDepartment();
+        return departmentList;
     }
 }

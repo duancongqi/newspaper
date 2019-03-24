@@ -2,6 +2,8 @@ package com.windmill.jump;
 
 import com.windmill.department.pojo.Department;
 import com.windmill.department.service.DepartmentService;
+import com.windmill.login.pojo.User;
+import com.windmill.login.service.LoginService;
 import com.windmill.newspapers.pojo.Newspaper;
 import com.windmill.newspapers.service.NewspapersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @类名称：JumpController
@@ -25,6 +28,8 @@ public class JumpController {
     private NewspapersService newspapersService;
     @Autowired
     private DepartmentService departmentService;
+    @Autowired
+    private LoginService loginService;
     /**
      * @作者: 段大神经
      * @功能描述: 首页面
@@ -144,5 +149,31 @@ public class JumpController {
     @GetMapping("toUser")
     public String toUser(){
         return "user/userList";
+    }
+    /**
+     * @作者: 老西儿
+     * @功能描述: 跳转添加成员页面
+     * @时间: 2019/3/24 15:36
+     * @参数:  * @param null
+     * @返回值:
+     **/
+    @GetMapping("toInsertUser")
+    public String toInsertUser(){
+        return "user/addUser";
+    }
+    /**
+     * @作者: 老西儿
+     * @功能描述: 跳转到成员修改页面
+     * @时间: 2019/3/24 16:58
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("toUpdUser")
+    public String toupdUser(HttpServletRequest request,Model model){
+        User user = new User();
+        user.setUserId(Integer.valueOf(request.getParameter("userId")));
+        List<User> userByWhere = loginService.getUserByWhere(user);
+        model.addAttribute("userlist",userByWhere);
+        return "user/updUser";
     }
 }

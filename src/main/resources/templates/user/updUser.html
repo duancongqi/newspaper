@@ -1,0 +1,82 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>修改成员页面</title>
+</head>
+<body>
+<form id="updataUserForm" th:each="user:${userlist}">
+    <input type="hidden" th:value="${user.userId}" id="userId" name="userId">
+    <label>成员姓名:</label>
+    <input type="text" name="userName" class="form-control" th:value="${user.userName}" id="userName" >
+    <label>密码:</label>
+    <input type="text" name="userPassword" class="form-control" th:value="${user.userPassword}" id="userPassword">
+    <label>性别:</label>
+    <select class="form-control" name="userSex" id="userSex">
+        <option value="0"  th:selected="${user.userSex == 0}">男</option>
+        <option value="1"  th:selected="${user.userSex == 1}">女</option>
+    </select>
+    <label>学号:</label>
+    <input type="text" name="stuNumb" class="form-control" th:value="${user.stuNumb}" id="stuNumb">
+    <label>所在班级:</label>
+    <input type="text" name="userClass" class="form-control" th:value="${user.userClass}" id="userClass">
+    <label>电话:</label>
+    <input type="text" name="userPhone" class="form-control" th:value="${user.userPhone}" id="userPhone">
+    <label>所在部门</label>
+    <select class="form-control" name="depName" id="depName">
+        <option value="0"  ><p th:text="${user.depName}">233</p></option>
+    </select>
+    <label>QQ号：</label>
+    <input type="text" name="userQq" class="form-control" th:value="${user.userQq}" id="userQq">
+</form>
+</body>
+<script type="text/javascript">
+    $(function (){
+        $.ajax({
+            url:"/selectDepartment",
+            dataType:"json",
+            async:"false",
+            type:"get",
+            success:function(data){
+                for (var i = 0;i < data.length;i++){
+                    $("#depName").append("<option value='"+data[i].depName+"'>"+data[i].depName+"</option>");
+                }
+            }
+        })
+    })
+    function chenckupdUserForm() {
+        if ($("#userName").val()==""){
+            alert("用户名不能为空!")
+            return false;
+        }
+        else if ($("#userPassword").val()== "") {
+            alert("密码不能为空!");
+            return false;
+        }
+        else if ($("#userSex").val()=="" ){
+            alert("请选择性别!")
+            return false;
+        }
+        else if ($("#stuNumb").val()==""){
+            alert("学号不能为空!")
+            return false;
+        }
+        else if ($("#userClass").val()==""){
+            alert("班级不能为空!")
+            return false;
+        }
+        else if($("#userPhone").val()==""){
+            alert("电话不能为空!")
+            return false;
+        }
+        else if($("#depName").val()==""){
+            alert("请选择部门!")
+            return false;
+        }
+        else if ($("#userQq").val()==""){
+            alert("请输入QQ号!")
+            return false;
+        }
+        return true;
+    }
+</script>
+</html>

@@ -42,6 +42,6 @@
         t_dapartment d
       LEFT JOIN t_depnewsrelation l ON d.dep_id = l.dep_id
       LEFT JOIN t_news n ON n.news_id = l.news_id
-      WHERE d.dep_id = #{depId}
+      WHERE d.dep_id = #{depId} OR d.dep_name like CONCAT('%',#{depName},'%')
     </select>
 </mapper>
