@@ -20,7 +20,7 @@ import java.util.Iterator;
 import java.util.Random;
 /**
  * @类名称: Uploader
- * @作者: 段聪祺
+ * @作者: 段大神经
  * @创建时间: 2018/10/16 09:23
  * @说明: UEditor文件上传辅助类
  */
