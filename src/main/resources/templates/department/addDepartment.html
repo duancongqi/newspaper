@@ -21,7 +21,7 @@
             <div class="control-group">
                 <label class="col-md-3 control-label span3"></label>
                 <div class="col-md-9">
-                    <img id="depimg" src="" width="100px" height="100px">
+                    <img id="files" src="" width="100px" height="100px">
                 </div>
             </div>
             <div class="control-group">
@@ -30,7 +30,7 @@
                     <div class="input-group">
                         <input id="photoCover" class="form-control" readonly type="text">
                         <label class="input-group-btn">
-                            <input id="file" type="file" name="file"  style="left: -9999px; position: absolute;">
+                            <input id="depImg" type="file" name="depImg"  style="left: -9999px; position: absolute;">
                             <span class="btn btn-default">选择图片</span>
                         </label>
                     </div>
@@ -47,50 +47,48 @@
 <script>
     //html5实现图片预览功能
     $(function () {
-    $("#file").change(function (e) {
+    $("#depImg").change(function (e) {
         var file = e.target.files[0] || e.dataTransfer.files[0];
-        $('#photoCover').val(document.getElementById("file").files[0].name);
+        $('#photoCover').val(document.getElementById("depImg").files[0].name);
         if (file) {
             var reader = new FileReader();
             reader.onload = function () {
-                $("depimg").attr("src", this.result);
+                $("#files").attr("src", this.result);
             }
             reader.readAsDataURL(file);
         }
     });
     })
-    //方式一 Jquery实现
-    function saveDepartment() {
-        if($("#depName").val()==""){
-            alert("请输入部门名称")
-            return false;
-        }else if($("#depFunction").val()==""){
-            alert("请输入部门职能")
-            return false;
-        }
-       /* var departmentnames = $("#depName").val().trim();
-        var depfunction = $("#depFunction").val().trim();
-        var file = document.getElementById("depPhoto").files[0];
-        console.log(departmentnames);
-        console.log(depfunction)
-        console.log(file)*/
-      /*  var formData = new FormData();
-        formData.append('depName', departmentnames);
-        formData.append('depFunction', depfunction);
-        formData.append('depPhoto', file);
-        $.ajax({
-            url: "/createDepartment",
-            type: "post",
-            data: formData,
-            contentType: false,
-            success: function (data) {
-                console.log(data);
-            },
-            error: function (data) {
-                console.log(data);
+        function saveDepartment() {
+            if($("#depName").val()==""){
+                alert("请输入部门名称")
+                return false;
+            }else if($("#depFunction").val()==""){
+                alert("请输入部门职能")
+                return false;
+            }else{
+                var departmentnames = $("#depName").val().trim();
+                var depfunction = $("#depFunction").val().trim();
+                var file = document.getElementById("depImg").files[0];
+                var formData = new FormData();
+                formData.append('depName', departmentnames);
+                formData.append('depFunction', depfunction);
+                formData.append('depImg', file);
+                $.ajax({
+                    url: "/createDepartment",
+                    type: "post",
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    mimeType: "multipart/form-data",
+                    success: function () {
+                        window.location.href = "";
+                    },
+                    error: function (data) {
+                        console.log(data);
+                    }
+                });
             }
-        });*/
-      $("#testform").submit();
     }
 </script>
 </body>

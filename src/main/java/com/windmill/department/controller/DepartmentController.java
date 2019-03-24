@@ -10,15 +10,11 @@ import com.windmill.utils.ResultUtil;
 import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -57,20 +53,19 @@ public class DepartmentController {
      * @param request
      * @返回值: com.windmill.utils.ResultUtil
      **/
-    @PostMapping("createDepartment")
-    public ResultUtil createDepartment(Department department,@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request) {
+    @RequestMapping("createDepartment")
+    public ResultUtil createDepartment(Department department, HttpServletRequest request){
         if (StringUtils.isBlank(department.getDepName())){
             return ResultUtil.builder().code("2").msg("部门名称为空").build();
         }
         if (StringUtils.isBlank(department.getDepFunction())){
             return ResultUtil.builder().code("2").msg("部门职能为空").build();
         }
-        if (StringUtils.isNotBlank(multipartFile.toString())){
-            department.setDepPhoto(FileUtil.fileUpload(multipartFile, request));
+        if (StringUtils.isNotBlank(department.getDepImg().toString())){
+            department.setDepPhoto(FileUtil.fileUpload(department.getDepImg(), request));
         }else {
             return ResultUtil.builder().code("2").msg("部门图片为空").build();
         }
-        System.out.println("文件类型ContentType=" + multipartFile.getContentType());
         int i = departmentService.createDepartment(department);
         if (i > 0){
             return ResultUtil.builder().code("1").build();

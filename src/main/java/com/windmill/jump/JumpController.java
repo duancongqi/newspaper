@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @类名称：JumpController
  * @作者: 段大神经
@@ -47,7 +49,7 @@ public class JumpController {
     }
     /**
      * @作者: 老西儿
-     * @功能描述: //TODO
+     * @功能描述: 跳转部门管理页面
      * @时间: 2019/3/21 23:07
      * @参数:  * @param
      * @返回值: java.lang.String
@@ -56,11 +58,25 @@ public class JumpController {
     public String toDepartment(){
         return "department/departmentList";
     }
+    /**
+     * @作者: 老西儿
+     * @功能描述: 跳转到添加部门页面
+     * @时间: 2019/3/24 11:31
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
     @GetMapping("toInsertDepartment")
     public String toInsertDepartment(){
         return "department/addDepartment";
     }
-
+    @GetMapping("toUpdateDepartment")
+    public String toUpdateaDepartment(HttpServletRequest request,Model modle){
+        Department department = new Department();
+        department.setDepId(Integer.valueOf(request.getParameter("depId")));
+        Department departments = departmentService.getDepartmentById(department.getDepId());
+        modle.addAttribute("dep",departments);
+        return "department/updateDepartment";
+    }
     /**
      * @作者: 段大神经
      * @功能描述: 根据id查询新闻内容
