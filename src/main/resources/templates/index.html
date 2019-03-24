@@ -101,7 +101,7 @@
     }
     #wrap {
         display:block;
-        bottom:20px;
+        bottom:0px;
         right:185px
         !important;
         width:80px;
@@ -113,11 +113,26 @@
         background:#000;
     }
     ul.b {list-style-type:square;}
+    pre {
+        display: block;
+        padding: 9.5px;
+        margin: 0 0 10px;
+        font-size: 13px;
+        line-height: 1.42857143;
+        color: #333;
+        word-break: break-all;
+        word-wrap: break-word;
+        background-color: #f5f5f5;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        height: 309px;
+    }
 </style>
 <body style="width: 80%;margin-left: 10%;">
 <div style="border: 1px">
         <div class="" style="height: 10%;margin-top: 50px">
             <h1>民大IT报</h1>
+            <button style="float: right;" onclick="loginFunction()" type="button" class="btn btn-default">登陆</button>
         </div>
 
     <img src="http://www.runoob.com/wp-content/uploads/2014/07/slide2.png" alt="Second slide" style="width: 100%;height: 2px">
@@ -134,7 +149,7 @@
                             </div>
                         </a>
                         <!--//部门下拉-->
-                        <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1" id="deptMenu">
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1" id="deptMenu" style="width: 507px;">
 
                         </ul>
                     </div>
@@ -145,7 +160,8 @@
 
             <div class="tab-content tabs row" style="height: 280px">
                 <div role="tabpanel" class="tab-pane fade in active" id="one" >
-                    <pre style="height: 280px">本课题是我和几个同学一起合作做共享单车运营管理平台，我负责的其中租车还车管理子系统。随着智能手机的出现，通信技术的发展促使了像共享单车这样的共享经济的普及，
+                    <pre style="height: 280px">
+                        本课题是我和几个同学一起合作做共享单车运营管理平台，我负责的其中租车还车管理子系统。随着智能手机的出现，通信技术的发展促使了像共享单车这样的共享经济的普及，
                         运营管理平台作为共享单车管理的核心，租车还车模块则是整个运营管理平台中的重要组成部件：当手机App扫码了之后，需要把自行车编号以及用户账号发到运营管理平台，
                         运营管理平台通过我设计租车还车子系统检查单车状态，检查用户是否满足开锁需求。之后与自动锁进行通信，发送开锁指令；开始当前形成记录和计费；租车人锁车后，
                         租车还车子系统更改单车状态，归档形成记录和消费记录。
@@ -200,27 +216,13 @@
             </div>
         </div>
 
-        <div class="row" style="height: 380px" bgcolor="#44">
+        <div class="row" style="height: 350px" bgcolor="#44">
             <div class="col-lg-6" style="height: 370px">
                 <h4 style="float: left;margin-top: 20px;margin-left: 20px">公告</h4>
                 <div style="float: left;margin-top: 50px;margin-left: 20px;width: 80%;height: auto">
-                <pre>
-本课题是我和几个同学一起合作做共享单车运营管理平台，
-我负责的其中租车还车管理子系统。随着智能手机的出现，
-通信技术的发展促使了像共享单车这样的共享经济的普及，
-运营管理平台作为共享单车管理的核心，租车还车模块则是
-整个运营管理平台中的重要组成部件：当手机App扫码了之后，
-需要把自行车编号以及用户账号发到运营管理平台，
-运营管理平台通过我设计租车还车子系统检查单车状态，
-检查用户是否满足开锁需求。之后与自动锁进行通信，发送开锁
-指令；开始当前形成记录和计费；租车人锁车后，
-租车还车子系统更改单车状态，归档形成记录和消费记录。
-通过此次课题的研究能进一步学习物联网开发技术，共享单
-车的实现其实质是一个典型的物联网应用。物联网应用是新
-一代信息技术的重要组成部分，也是“信息化”时代的重
-要发展阶段。因万物互联，物联网应用将产生海量数据，
-对数据的分析和利用，也将为社会创造更多新的商业机遇，例
-                </pre>
+                    <pre>
+
+                    </pre>
                 </div>
             </div>
             <div class="col-lg-6" style="height: 370px">
@@ -233,12 +235,55 @@
             </div>
         </div>
         <img src="http://www.runoob.com/wp-content/uploads/2014/07/slide2.png" alt="Second slide" style="width: 100%;height: 2px">
-            <div style="float: right;margin-right: 4px  ">民大IT报</div>
+        <div style="float: right;margin-right: 4px  ">民大IT报</div>
         <div style="height: 5%;">
             <div style="" id="wrap" >
                 <img id="" th:src="@{/image/2.jpg}" alt="Second slide" height="80px" width="80px">
             </div>
         </div>
+</div>
+
+
+
+
+
+<!-- 模态框（Modal） 登陆-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+           <!-- <div class="modal-header">
+                登陆
+            </div>-->
+            <div class="modal-body">
+                <form class="form-horizontal" id="userLoginForm">
+                    <fieldset>
+                        <div id="legend" class="">
+                            <legend class="">登陆</legend>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                            <label class="control-label" for="userName">账号</label>
+                                <input type="text" id="userName" name="userName" placeholder="用户名" class="input-xlarge">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="control-group">
+                            <div class="controls">
+                            <label class="control-label" for="userPassword">密码</label>
+                                <input type="password" id="userPassword" name="userPassword" placeholder="密码" class="input-xlarge">
+                            </div>
+                        </div>
+
+                    </fieldset>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <center>
+                    <button class="btn btn-success" onclick="userLogin()">登陆</button>
+                </center>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
 </div>
 </body>
 <script>
@@ -256,11 +301,25 @@
             dataType: "json",
             success: function(result){
                 var html = "";
-                $.each(result, function(i) {
-                    hrefs = "getNewspaperById?newsId="+result[i].newsId;
-                    html +="<li><a target=\"_blank\" href='"+hrefs+"'>"+result[i].newsTitle+"</a></li>"
-                });
-                $("#apendUL").append(html);
+                if(result.length>=5){
+                    for (var i=0;i<5;i++){
+                        hrefs = "getNewspaperById?newsId="+result[i].newsId;
+                        html +="<li style='list-style-type:circle;'>" +
+                            "<a target=\"_blank\" href='"+hrefs+"'>"+result[i].newsTitle+"</a>" +
+                            "</li>" +
+                            "<br/>" ;
+                    }
+                    $("#apendUL").append(html);
+                }else{
+                    $.each(result, function(i) {
+                        hrefs = "getNewspaperById?newsId="+result[i].newsId;
+                        html +="<li style='list-style-type:circle;'>" +
+                            "<a target=\"_blank\" href='"+hrefs+"'>"+result[i].newsTitle+"</a>" +
+                            "</li>" +
+                            "<br/>" ;
+                    });
+                    $("#apendUL").append(html);
+                }
             }
         })
 
@@ -273,15 +332,40 @@
             },
             dataType: "json",
             success: function(result){
+                var data = result.rows;
                 var html = "";
-                $.each(result, function(i) {
-                    hrefs = "getDepartmentByIds?depId="+result[i].depId;
-                    html +="<li><a target=\"_blank\" href='"+hrefs+"'>"+result[i].depName+"</a></li>"
+                $.each(data, function(i) {
+                    hrefs = "getDepartmentByIds?depId="+data[i].depId;
+                    html +="<li><a target=\"_blank\" href='"+hrefs+"'>"+data[i].depName+"</a></li>"
                 });
                 $("#deptMenu").append(html);
             }
         })
     })
 
+    function loginFunction(){
+        $('#myModal').modal('toggle');
+    }
+    function userLogin() {
+        var userName = $("#userName").val();
+        var userPassword = $("#userPassword").val();
+        $.ajax({
+            url:'login',
+            type:'get',
+            data:{
+                "userName":userName,
+                "userPassword":userPassword
+            },
+            dataType:'json',
+            success:function(data){
+                if(data.code == 2){
+                    alert(data.msg);
+                }else{
+                    location.reload();
+                    location.href = "toMindex";
+                }
+            }
+        })
+    }
 </script>
 </html>
