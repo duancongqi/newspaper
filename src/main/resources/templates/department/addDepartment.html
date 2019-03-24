@@ -1,0 +1,97 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加部门</title>
+</head>
+<body>
+    <div class="row">
+        <form class="form-horizontal" enctype="multipart/form-data" role="form" id="testform" method="post" action="/createDepartment">
+            <div class="control-group">
+                <label for="depName" class="col-md-3 control-label span3">部门名称:</label>
+                <div class="col-md-9">
+                    <input type="text" class="form-control span3" value="" id="depName" name="depName">
+                </div>
+            </div>
+            <div class="control-group">
+                <label for="depFunction" class="col-md-3 control-label span3">部门职能:</label>
+                <div class="col-md-9">
+                    <input type="text" class="form-control span3" value="" id="depFunction" name="depFunction">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="col-md-3 control-label span3"></label>
+                <div class="col-md-9">
+                    <img id="depimg" src="" width="100px" height="100px">
+                </div>
+            </div>
+            <div class="control-group">
+                <label for="photoCover" class="col-md-3 control-label span3">图片上传</label>
+                <div class="col-md-9">
+                    <div class="input-group">
+                        <input id="photoCover" class="form-control" readonly type="text">
+                        <label class="input-group-btn">
+                            <input id="file" type="file" name="file"  style="left: -9999px; position: absolute;">
+                            <span class="btn btn-default">选择图片</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="col-md-2 control-label span2"></label>
+                <div class="col-md-10">
+                    <a class="btn btn-small btn-danger" onclick="saveDepartment()">提交</a>
+                </div>
+            </div>
+        </form>
+    </div>
+<script>
+    //html5实现图片预览功能
+    $(function () {
+    $("#file").change(function (e) {
+        var file = e.target.files[0] || e.dataTransfer.files[0];
+        $('#photoCover').val(document.getElementById("file").files[0].name);
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function () {
+                $("depimg").attr("src", this.result);
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+    })
+    //方式一 Jquery实现
+    function saveDepartment() {
+        if($("#depName").val()==""){
+            alert("请输入部门名称")
+            return false;
+        }else if($("#depFunction").val()==""){
+            alert("请输入部门职能")
+            return false;
+        }
+       /* var departmentnames = $("#depName").val().trim();
+        var depfunction = $("#depFunction").val().trim();
+        var file = document.getElementById("depPhoto").files[0];
+        console.log(departmentnames);
+        console.log(depfunction)
+        console.log(file)*/
+      /*  var formData = new FormData();
+        formData.append('depName', departmentnames);
+        formData.append('depFunction', depfunction);
+        formData.append('depPhoto', file);
+        $.ajax({
+            url: "/createDepartment",
+            type: "post",
+            data: formData,
+            contentType: false,
+            success: function (data) {
+                console.log(data);
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });*/
+      $("#testform").submit();
+    }
+</script>
+</body>
+</html>
