@@ -19,6 +19,12 @@
      * 因此，UEditor提供了针对不同页面的编辑器可单独配置的根路径，具体来说，在需要实例化编辑器的页面最顶部写上如下代码即可。当然，需要令此处的URL等于对应的配置。
      * window.UMEDITOR_HOME_URL = "/xxxx/xxxx/";
      */
+    var curWwwPath = window.document.location.href;
+    var pathName = window.document.location.pathname;
+    var pos = curWwwPath.indexOf(pathName);
+    var localhostPath = curWwwPath.substring(0, pos);
+    //文件所在的绝对路径 访问静态资源文件的时候使用此路径
+    window.UMEDITOR_HOME_URL=localhostPath+"/js/ueditor/";
     var URL = window.UMEDITOR_HOME_URL || (function(){
 
         function PathStack() {
