@@ -65,19 +65,7 @@ public class NewspapersController {
         return newspapersService.getNewspaper();
     }
 
-    /**
-     * @作者: 段大神经
-     * @功能描述: 根据id查询新闻内容
-     * @时间: 2019/3/21 20:02
-     * @参数:  * @param newspaper
-     * @返回值: com.windmill.newspapers.pojo.Newspaper
-     **/
-    @RequestMapping("getNewspaperById")
-    public String getNewspaperById(Newspaper newspaper,Model model){
-        Newspaper news = newspapersService.getNewspaperById(newspaper);
-        model.addAttribute("thisEntity",news);
-        return "show";
-    }
+
     /**
      * @作者: 段大神经
      * @功能描述: 添加新闻

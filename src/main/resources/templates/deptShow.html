@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>民大it报</title>
+    <!-- 引入核心js,css文件 -->
+    <footer th:replace="common/jscore" />
+</head>
+<style>
+    #wrap {
+        display:block;
+        bottom:20px;
+        right:185px
+        !important;
+        width:80px;
+        line-height:30px;
+        position:fixed;
+        border:1px solid #fff;
+        text-align:center;
+        /*color:#fff;*/
+        /*background:#000;*/
+    }
+</style>
+<body style="width: 80%;margin-left: 10%">
+<div class="" style="height: 10%;margin-top: 50px;text-align: left">
+    <h1 id="newsTitle" >[[${thisEntity?.depName}]]</h1>
+    [[${thisEntity?.depFunction}]]
+</div>
+<div class="container-fluid" style="height: 800px;margin-bottom: 20px">
+    <div class="row-fluid">
+        <div class="span12" th:utext="${thisEntity?.depPhoto}">
+        </div>
+    </div>
+</div>
+<!--<img src="http://www.runoob.com/wp-content/uploads/2014/07/slide2.png" alt="Second slide" style="width: 100%;height: 2px">-->
+<div style="" id="wrap" >
+    <span bgcolor="white">民大IT报</span>
+    <img id="" src="2.jpg" alt="Second slide" height="80px" width="80px">
+</div>
+<div></div>
+</body>
+
+</html>

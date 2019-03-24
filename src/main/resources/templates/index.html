@@ -133,21 +133,14 @@
                             <div style="position: absolute;top: -28px;left: 295px;" class="glyphicon glyphicon-sort-by-attributes-alt">
                             </div>
                         </a>
-                        <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
-                            <li><a href="#jmeter" tabindex="-1" data-toggle="tab">jmeter</a></li>
-                            <li><a href="#ejb" tabindex="-1" data-toggle="tab">ejb</a></li>
+                        <!--//部门下拉-->
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1" id="deptMenu">
+
                         </ul>
                     </div>
                 </li>
                 <li role="presentation"><a href="#three" role="tab" data-toggle="tab">报社概况</a></li>
-                <div id="" style="">
-                    <ul class="dropdown-menu" style="background-color: palegoldenrod !important;" id="dropDownCur">
-                        <li><a href="#">jmeter</a></li>
-                        <li><a href="#">jmeter1</a></li>
-                        <li><a href="#">jmeter2</a></li>
 
-                    </ul>
-                </div>
             </ul>
 
             <div class="tab-content tabs row" style="height: 280px">
@@ -243,7 +236,7 @@
             <div style="float: right;margin-right: 4px  ">民大IT报</div>
         <div style="height: 5%;">
             <div style="" id="wrap" >
-                <img id="" src="2.jpg" alt="Second slide" height="80px" width="80px">
+                <img id="" th:src="@{/image/2.jpg}" alt="Second slide" height="80px" width="80px">
             </div>
         </div>
 </div>
@@ -253,6 +246,7 @@
         interval: 3000
     })
     $(function (){
+        //动态加载往期报纸
         $.ajax({
             type: "get",
             url: "getNewspaper",
@@ -269,16 +263,25 @@
                 $("#apendUL").append(html);
             }
         })
+
+        //动态加载部门下拉
+        $.ajax({
+            type: "get",
+            url: "findDepartment",
+            data: {
+                // 'id' : null,
+            },
+            dataType: "json",
+            success: function(result){
+                var html = "";
+                $.each(result, function(i) {
+                    hrefs = "getDepartmentByIds?depId="+result[i].depId;
+                    html +="<li><a target=\"_blank\" href='"+hrefs+"'>"+result[i].depName+"</a></li>"
+                });
+                $("#deptMenu").append(html);
+            }
+        })
     })
 
-    $("#dropdownMenu1").hover(
-        function(){
-            $("#dropDownCur").show();
-        });//为了鼠标可以进入下拉框
-    $("#dropDownCur").hover(function() {
-        $(this).show();//鼠标进入下拉框
-    }, function() {
-        $(this).hide();//鼠标离开下拉框后，就会消失
-    });
 </script>
 </html>
