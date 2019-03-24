@@ -104,4 +104,26 @@ public class JumpController {
         model.addAttribute("thisEntity",department);
         return "deptShow";
     }
+    /**
+     * @作者: 段大神经
+     * @功能描述: 去添加新闻页面
+     * @时间: 2019/3/24 12:39
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @RequestMapping("toCreateNews")
+    public String toCreateNews(){
+        return "newspapers/addnews";
+    }
+    /**
+     * @作者: 段大神经
+     * @功能描述: 去新闻管理页面
+     * @时间: 2019/3/24 13:44
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @RequestMapping("toNewsPapers")
+    public String toNewsPapers(){
+        return "newspapers/shownews";
+    }
 }
