@@ -11,7 +11,9 @@
         </i>添加
     </button>
 </div>
-<table id="news_show"></table>
+<table id="news_show">
+
+</table>
 </body>
 <script type="text/javascript">
     $("#news_show").bootstrapTable({
@@ -33,11 +35,13 @@
             field:"newsTitle",
             title:"标题",
             align:'center',
+            width: '20%',
         },{
             field:"newsNote",
             title:"内容",
             align:'center',
-        },{field:'cc',title:'操作',align:'center',width:350,formatter:function(value,rows,index){
+            width: '60%',
+        },{field:'cc',title:'操作',align:'center',width: '20%',formatter:function(value,rows,index){
                 var str="";
                 str+="<button class='btn btn-info dim' type='button' onclick='delNews(\""+rows.newsId+"\")' ><i class='fa fa-paste'></i>删除</button>"+"  ";
                 str+="<button class='btn btn-info dim' type='button' onclick='updateNews(\""+rows.newsId+"\")' ><i class='fa fa-paste'></i>修改</button>";
@@ -58,12 +62,13 @@
             BootstrapDialog.show({
                 title:"删除确认",
                 message:"确定要删除吗？",
+                closable: false,
                 buttons: [ {
                     label: '确认',
                     cssClass: 'btn-primary',
                     action: function(dialogItself){
                         $.ajax({
-                            url:"/delNewspaper",
+                            url:"delNewspaper",
                             data:{
                                 "newsId":ids
                             },
@@ -101,22 +106,32 @@
             BootstrapDialog.show({
                 title:"修改页面",
                 message: $('<div></div>').load('/updateNews?newsId='+ids),
+                closable: false,
                 buttons: [ {
                     label: '保存',
                     cssClass: 'btn-primary',
                     action: function(dialogItself){
                         var updNewsflag=chenckUpdNewsForm();
+                        debugger
                         if(!updNewsflag){
                             return;
                         }
                         $.ajax({
                             url:"/updateNewspaper",
-                            data:{},
-                            dataType:"text",
+                            data:{
+                                newsId:$("#newsId").val(),
+                                newsTitle:$("#newsTitle").val(),
+                                newsNote:newsUpdEditor.getPlainTxt()
+                            },
+                            dataType:"json",
                             type:"post",
                             success:function(data){
-                                dialogItself.close();
-                                $("#news_show").bootstrapTable('refresh',{pageNumber:1});
+                                if(data.code == 2){
+                                    alert(data.msg);
+                                }else{
+                                    location.reload();
+                                    dialogItself.close();
+                                }
                             },
                             error:function(){
                                 BootstrapDialog.show({
@@ -157,7 +172,7 @@
                         return;
                     }
                     $.ajax({
-                        url:"/createNewspaper",
+                        url:"createNewspaper",
                         data:{
                             newsTitle:$("#add_News_title").val(),
                             newsNote:newsAddEditor.getPlainTxt()
@@ -165,8 +180,10 @@
                         dataType:"text",
                         type:"post",
                         success:function(date){
+                            debugger
+                            // $("#news_show").bootstrapTable('refresh',{pageNumber:1});
                             dialogItself.close();
-                            $("#news_show").bootstrapTable('refresh',{pageNumber:1});
+                            location.reload();
                         },
                         error:function(){
                             BootstrapDialog.show({

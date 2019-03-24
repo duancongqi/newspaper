@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @创建时间: 2018/9/29 22:09
  * @说明: web配置类
  */
-//@Configuration
+@Configuration
 public class WebConfig implements WebMvcConfigurer {
     @Autowired
     private MyInterceptor myInterceptor;
@@ -22,7 +22,7 @@ public class WebConfig implements WebMvcConfigurer {
                 //拦截配置
                 .addPathPatterns("/**")
                 .excludePathPatterns(
-               "/js/**","/image/**","/login","/index","/","/findDepartment"
+               "/js/**","/image/**","/login","/index","/","/findDepartment","/upload/**","/getNewspaperById","/getDepartmentByIds","/getNewspaper"
         )
         ;
     }

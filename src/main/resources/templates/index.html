@@ -160,7 +160,7 @@
 
             <div class="tab-content tabs row" style="height: 280px">
                 <div role="tabpanel" class="tab-pane fade in active" id="one" >
-                    <pre style="height: 280px;font-size: 20px">
+                    <pre style="height: 280px;font-size: 18px">
 <p style="float: left;margin-left: 15%">·报刊是促进人民的文化和智育发展的强大杠杆。——马克思</p>
 　　
 <p style="float: left;margin-left: 15%">·报纸和太阳一样，它们共同的使命就是给人带来光明。——萨特</p>
@@ -314,21 +314,22 @@
             },
             dataType: "json",
             success: function(result){
+                var data = result.rows;
                 var html = "";
-                if(result.length>=5){
+                if(data.length>=5){
                     for (var i=0;i<5;i++){
-                        hrefs = "getNewspaperById?newsId="+result[i].newsId;
+                        hrefs = "getNewspaperById?newsId="+data[i].newsId;
                         html +="<li style='list-style-type:circle;'>" +
-                            "<a target=\"_blank\" href='"+hrefs+"'>"+result[i].newsTitle+"</a>" +
+                            "<a target=\"_blank\" href='"+hrefs+"'>"+data[i].newsTitle+"</a>" +
                             "</li>" +
                             "<br/>" ;
                     }
                     $("#apendUL").append(html);
                 }else{
-                    $.each(result, function(i) {
-                        hrefs = "getNewspaperById?newsId="+result[i].newsId;
+                    $.each(data, function(i) {
+                        hrefs = "getNewspaperById?newsId="+data[i].newsId;
                         html +="<li style='list-style-type:circle;'>" +
-                            "<a target=\"_blank\" href='"+hrefs+"'>"+result[i].newsTitle+"</a>" +
+                            "<a target=\"_blank\" href='"+hrefs+"'>"+data[i].newsTitle+"</a>" +
                             "</li>" +
                             "<br/>" ;
                     });

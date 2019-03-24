@@ -7,7 +7,6 @@ import com.windmill.department.service.DepartmentService;
 import com.windmill.utils.FileUtil;
 import com.windmill.utils.Page;
 import com.windmill.utils.ResultUtil;
-import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
