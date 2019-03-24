@@ -96,7 +96,7 @@ public class JumpController {
     public String getNewspaperById(Newspaper newspaper, Model model){
         Newspaper news = newspapersService.getNewspaperById(newspaper);
         model.addAttribute("thisEntity",news);
-        return "show";
+        return "firstshow/newsShow";
     }
 
     /**
@@ -110,7 +110,7 @@ public class JumpController {
     public String getDepartmentById(@RequestParam Integer depId,Model model){
         Department department = departmentService.getDepartmentById(depId);
         model.addAttribute("thisEntity",department);
-        return "deptShow";
+        return "firstshow/deptShow";
     }
     /**
      * @作者: 段大神经
