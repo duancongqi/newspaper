@@ -207,19 +207,14 @@ public class JumpController {
     }
     /**
      * @作者: 老西儿
-     * @功能描述: 跳转到修改考勤页面
-     * @时间: 2019/3/24 19:47
-     * @参数:  * @param request
-     * @param model
+     * @功能描述: 跳转到新增考勤页面
+     * @时间: 2019/3/24 19:29
+     * @参数:  * @param
      * @返回值: java.lang.String
      **/
-    @GetMapping("toUpdCheckWork")
-    public String toUpdCheckWork(HttpServletRequest request,Model model){
-        CheckWork checkWork = new CheckWork();
-        checkWork.setCwId(Integer.valueOf(request.getParameter("cwId")));
-        List<CheckWork> list = checkWorkService.findCheckWorkByWhere(checkWork);
-        model.addAttribute("checkworklist",list);
-        return "checkwork/updCheckWork.html";
+    @GetMapping("toInsertCheckWork")
+    public String toInsertCheckWork(){
+        return "checkwork/addCheckWork";
     }
     }
 

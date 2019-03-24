@@ -26,10 +26,10 @@ public class CheckWorkServiceImpl implements CheckWorkService {
     private LoginMapper loginMapper;
     @Override
     public void createCheckWork(CheckWork checkWork) {
-        List<Integer> list = checkWork.getUserIds();
+        List<String> list = checkWork.getUserIds();
         User user = new User();
         list.forEach(l->{
-            user.setUserId(l);
+            user.setUserId(Integer.valueOf(l));
             List list1 = loginMapper.getUserByWhere(user);
             if (!CollectionUtils.isEmpty(list1)){
                 User user1 = (User) list1.get(0);
