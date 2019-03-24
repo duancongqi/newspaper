@@ -1,5 +1,7 @@
 package com.windmill.jump;
 
+import com.windmill.checkwork.pojo.CheckWork;
+import com.windmill.checkwork.service.CheckWorkService;
 import com.windmill.department.pojo.Department;
 import com.windmill.department.service.DepartmentService;
 import com.windmill.login.pojo.User;
@@ -31,6 +33,8 @@ public class JumpController {
     private DepartmentService departmentService;
     @Autowired
     private LoginService loginService;
+    @Autowired
+    private CheckWorkService checkWorkService;
     /**
      * @作者: 段大神经
      * @功能描述: 首页面
@@ -166,28 +170,56 @@ public class JumpController {
      * @作者: 跳转添加成员页面
      * @功能描述: //TODO
      * @时间: 2019/3/24 19:04
-        * @参数:  * @param request
-        * @param model
-        * @返回值: java.lang.String
-        **/
-@GetMapping("toUpdUser")
-public String toUpdUser(HttpServletRequest request,Model model){
+    * @参数:  * @param request
+    * @param model
+    * @返回值: java.lang.String
+    **/
+    @GetMapping("toUpdUser")
+    public String toUpdUser(HttpServletRequest request,Model model){
         User user = new User();
         user.setUserId(Integer.valueOf(request.getParameter("userId")));
         List<User> users = loginService.getUserByWhere(user);
         model.addAttribute("userlist",users);
         return "user/updUser";
-        }
-/**
- * @作者: 段大神经
- * @功能描述: 退出方法
- * @时间: 2019/3/12 21:53
- * @参数:  * @param session
- * @返回值: java.lang.String
- **/
-@GetMapping("logout")
-public String logout(HttpSession session){
+      }
+    /**
+     * @作者: 段大神经
+     * @功能描述: 退出方法
+     * @时间: 2019/3/12 21:53
+     * @参数:  * @param session
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("logout")
+    public String logout(HttpSession session){
         session.removeAttribute("user");
         return "redirect:/";
         }
-        }
+    /**
+     * @作者: 老西儿
+     * @功能描述: 跳转到考勤管理页
+     * @时间: 2019/3/24 19:48
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("toCheckWorkList")
+    public String toCheckWorkList(){
+        return "checkwork/checkworkList";
+    }
+    /**
+     * @作者: 老西儿
+     * @功能描述: 跳转到修改考勤页面
+     * @时间: 2019/3/24 19:47
+     * @参数:  * @param request
+     * @param model
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("toUpdCheckWork")
+    public String toUpdCheckWork(HttpServletRequest request,Model model){
+        CheckWork checkWork = new CheckWork();
+        checkWork.setCwId(Integer.valueOf(request.getParameter("cwId")));
+        List<CheckWork> list = checkWorkService.findCheckWorkByWhere(checkWork);
+        model.addAttribute("checkworklist",list);
+        return "checkwork/updCheckWork.html";
+    }
+    }
+
