@@ -1,9 +1,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>民大IT报后台管理系统</title>
+    <title>民大IT报</title>
     <link th:href="@{/js/core-css/index.css}" rel="stylesheet">
-    <!-- 引入js核心文件 -->
+    <!-- 引入核心js,css文件 -->
     <footer th:replace="common/jscore" />
 </head>
 <body>
@@ -12,16 +12,16 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" title="logoTitle" href="#">
-                <div style="float: left;margin-left: 300px">民大IT报</div>
+                <div style="float: left;margin-left: 20px">民大IT报</div>
             </a>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li role="presentation">
-                    <a href="#">当前用户：<span class="badge">${user.user_name}</span></a>
+                    <a href="#">当前用户：<span class="badge"></span></a>
                 </li>
                 <li>
-                    <a href="<%=request.getContextPath() %>/logout">
+                    <a th:href="@{/logout}">
                         <span class="glyphicon glyphicon-lock"></span>退出登录</a>
                 </li>
             </ul>
@@ -40,7 +40,7 @@
                 <a th:href="@{/toUser}" target="mainFrame">成员管理</a>
             </li>
             <li role="presentation">
-                <a th:href="@{/toMuser}" target="mainFrame">新闻管理</a>
+                <a th:href="@{/toNewsPapers}" target="mainFrame">新闻管理</a>
             </li>
             <li role="presentation">
                 <a th:href="@{/toMuser}" target="mainFrame">考勤管理</a>
@@ -51,7 +51,7 @@
     <div class="splitter"></div>
     <!-- 正文内容部分 -->
     <div class="pageContent">
-        <iframe src="<%=request.getContextPath() %>/toShowLogo" id="mainFrame" name="mainFrame" frameborder="0" width="100%" height="100%" frameBorder="0"></iframe>
+        <iframe th:src="@{/toShowLogo}" id="mainFrame" name="mainFrame" frameborder="0" width="100%" height="100%"></iframe>
     </div>
 </div>
 <!-- 选中蓝条 -->

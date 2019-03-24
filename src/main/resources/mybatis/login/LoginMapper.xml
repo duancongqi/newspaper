@@ -19,14 +19,14 @@
     <!-- 修改用户 -->
     <update id="updateUser" parameterType="com.windmill.login.pojo.User">
         UPDATE t_user SET user_name = #{userName},user_password = #{userPassword},
-        user_sex = #{userSex},stu_numb = #{stuNumb},user_class = #{userClass},
+        user_sex = #{userSex},stu_numb = #{stu_numb},user_class = #{userClass},
         user_phone = #{userPhone},dep_name = #{depName},user_qq = #{userQq}
         WHERE user_id = #{userId}
     </update>
     <!-- 添加用户 -->
     <insert id="createUser" parameterType="com.windmill.login.pojo.User">
         INSERT INTO t_user(user_name,user_password,user_sex,stu_numb,user_class,user_phone,dep_name,user_qq)
-        VALUE (#{userName},#{userPassword},#{userSex},#{stuNumb},#{userClass},#{userPhone},#{depName},#{userQq})
+        VALUE (#{userName},#{userPassword},#{userSex},#{stu_numb},#{userClass},#{userPhone},#{depName},#{userQq})
     </insert>
     <!-- 根据id删除用户 -->
     <delete id="delUserByUserId" parameterType="integer">

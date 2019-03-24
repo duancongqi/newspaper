@@ -36,12 +36,6 @@
                     </div>
                 </div>
             </div>
-            <div class="control-group">
-                <label class="col-md-2 control-label span2"></label>
-                <div class="col-md-10">
-                    <a class="btn btn-small btn-danger" onclick="saveDepartment()">提交</a>
-                </div>
-            </div>
         </form>
     </div>
 </body>
@@ -67,29 +61,8 @@
         }else if($("#depFunction").val()==""){
             alert("请输入部门职能")
             return false;
-        }else{
-            var departmentnames = $("#depName").val().trim();
-            var depfunction = $("#depFunction").val().trim();
-            var file = document.getElementById("depImg").files[0];
-            var formData = new FormData();
-            formData.append('depName', departmentnames);
-            formData.append('depFunction', depfunction);
-            formData.append('depImg', file);
-            $.ajax({
-                url: "/createDepartment",
-                type: "post",
-                data: formData,
-                contentType: false,
-                processData: false,
-                mimeType: "multipart/form-data",
-                success: function () {
-                    window.location.href = "";
-                },
-                error: function (data) {
-                    console.log(data);
-                }
-            });
         }
+        return true;
     }
 </script>
 </html>

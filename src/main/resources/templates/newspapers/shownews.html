@@ -20,7 +20,7 @@
         //查询参数：条件查询时使用
         queryParams:function(params){
             return{
-                "page":(this.pageNumber-1)*this.pageSize,
+                "page":this.pageNumber,
                 "limit":this.pageSize,
             }
         },
@@ -160,7 +160,7 @@
                         url:"/createNewspaper",
                         data:{
                             newsTitle:$("#add_News_title").val(),
-                            newsNote:schoolAddEditor.getPlainTxt()
+                            newsNote:newsAddEditor.getPlainTxt()
                         },
                         dataType:"text",
                         type:"post",
