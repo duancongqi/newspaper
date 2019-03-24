@@ -9,10 +9,11 @@
                   AND news_id = #{newsId}
               </if>
           </where>
+        ORDER BY news_id DESC
     </select>
     <!--取出所有标题-->
     <select id="getNewspaper" parameterType="com.windmill.newspapers.pojo.Newspaper" resultType="com.windmill.newspapers.pojo.Newspaper">
-        SELECT * FROM t_news
+        SELECT * FROM t_news ORDER BY news_id DESC
     </select>
     <!-- 添加新闻 -->
     <insert id="createNewspaper" parameterType="com.windmill.newspapers.pojo.Newspaper">
