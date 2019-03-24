@@ -11,6 +11,8 @@ import com.windmill.utils.Uploader;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -131,5 +133,18 @@ public class NewspapersController {
             return ResultUtil.builder().code("1").build();
         }
         return ResultUtil.builder().code("2").msg("删除失败").build();
+    }
+
+    /**
+     * @作者: 段大神经
+     * @功能描述: 新闻修改页面
+     * @时间: 2019/3/11 16:22
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("findNewspaperById")
+    public Newspaper updateNews(Newspaper newspaper){
+        Newspaper newspaperById = newspapersService.getNewspaperById(newspaper);
+        return newspaperById;
     }
 }

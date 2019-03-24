@@ -1,43 +1,60 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:include="common/editorjs">
     <meta charset="UTF-8">
-    <title>新闻修改页面</title>
-    <head th:replace="common/editorjs" />
+    <title>新闻添加页面</title>
 </head>
 <body>
-    <script type="text/plain" id="add_editor"></script>
-    <button id="testone" onclick="getPlainTxt()">获取内容</button>
-    <button id="insertHtml" onclick="setContent()">追加内容</button>
-    <script type="text/javascript">
-        var schoolAddEditor = UM.getEditor('add_editor');
-        <!-- 获取内容并存到session -->
-        function getPlainTxt() {
-            alert(schoolAddEditor.getPlainTxt())
-               /* $.ajax({
-                    url:'/createMsg',
-                    type:'post',
-                    data:{
-                        "msg":schoolAddEditor.getPlainTxt()
-                    }
-                })*/
+<input type="hidden"  class="form-control" id="newsId" th:value="${thisEntity?.newsId}">
+<label>标题:</label>
+<input type="text"  class="form-control" id="newsTitle" th:value="${thisEntity?.newsTitle}">
+<label>正文:</label>
+<div type="text/plain" id="newsNote" style=" width: 569px;" ></div>
+<script type="text/javascript">
+    var newsUpdEditor = UM.getEditor('newsNote');
+    $(function () {
+        $.ajax({
+            url:"/findNewspaperById",
+            data:{
+                'newsId' : [[${thisEntity?.newsId}]]
+            },
+            dataType:"json",
+            type:"get",
+            success:function(data){
+                newsUpdEditor.setContent(data.newsNote);
+            },
+            error:function(){
+                BootstrapDialog.show({
+                    title:"温馨提示",
+                    message: '系统出现BUG！请联系管理员！'
+                });
+            }
+
+        })
+    })
+
+    function chenckUpdNewsForm() {
+        var newsText = newsUpdEditor.getPlainTxt();
+        if ($("#newsTitle").val()==""){
+            alert("标题为空");
+            return false;
         }
-        <!-- 追加内容 -->
-        function setContent() {
-           /* $.ajax({
-                url:'/getMsg',
-                type:'get',
-                success:function (data) {
-                    alert(data)
-                    //清空并赋值
-                    //schoolAddEditor.setContent(data,false);
-                    //换行赋值
-                    //schoolAddEditor.setContent(data,true);
-                    //默认清空并赋值
-                    schoolAddEditor.setContent(data);
-                }
-            })*/
+        else if (newsText == "" ){
+            alert("内容为空");
+            return false;
         }
-    </script>
+        return true;
+    }
+/*    <!-- 追加内容 -->
+    function setContent() {
+        $.ajax({
+            url:'/getMsg',
+            type:'get',
+            success:function (data) {
+                newsUpdEditor.setContent(data);
+            }
+        })
+    }*/
+</script>
 </body>
 </html>
