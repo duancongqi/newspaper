@@ -29,7 +29,6 @@
         sidePagination:'server',//分页方式：client客户端分页，server服务端分页（*
         striped:true,
         queryParams:function(){
-            alert((this.pageNumber-1)*this.pageSize)
             return{
                 "page":(this.pageNumber-1)*this.pageSize,
                 "limit":this.pageSize,
