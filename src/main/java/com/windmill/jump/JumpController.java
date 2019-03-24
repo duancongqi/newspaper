@@ -38,7 +38,7 @@ public class JumpController {
     }
     /**
      * @作者: 老西儿
-     * @功能描述: //TODO
+     * @功能描述: 去管理用中心页面
      * @时间: 2019/3/21 22:15
      * @参数:  * @param null
      * @返回值: java.lang.String
