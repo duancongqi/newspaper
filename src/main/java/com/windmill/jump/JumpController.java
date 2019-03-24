@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * @类名称：JumpController
@@ -155,5 +156,17 @@ public class JumpController {
     @GetMapping("toShowLogo")
     public String toShowLogo(){
         return "common/welcome";
+    }
+    /**
+     * @作者: 段大神经
+     * @功能描述: 退出方法
+     * @时间: 2019/3/12 21:53
+     * @参数:  * @param session
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("logout")
+    public String logout(HttpSession session){
+        session.removeAttribute("user");
+        return "redirect:/";
     }
 }
