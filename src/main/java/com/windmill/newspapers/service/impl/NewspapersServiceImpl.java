@@ -44,4 +44,9 @@ public class NewspapersServiceImpl implements NewspapersService {
     public int delNewspaper(Newspaper newspaper) {
         return newspapersMapper.delNewspaper(newspaper);
     }
+
+    @Override
+    public List<Newspaper> getNewspaper() {
+        return newspapersMapper.getNewspaper();
+    }
 }

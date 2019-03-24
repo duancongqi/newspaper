@@ -2,6 +2,8 @@ package com.windmill.newspapers.service;
 
 import com.windmill.newspapers.pojo.Newspaper;
 
+import java.util.List;
+
 /**
  * @接口名称：NewspapersService
  * @作者: 段大神经
@@ -16,4 +18,6 @@ public interface NewspapersService {
     int updateNewspaper(Newspaper newspaper);
 
     int delNewspaper(Newspaper newspaper);
+
+    List<Newspaper> getNewspaper();
 }
