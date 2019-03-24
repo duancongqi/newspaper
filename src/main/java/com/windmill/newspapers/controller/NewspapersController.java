@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +26,7 @@ import java.util.Map;
  * @创建时间: 2019/3/21 13:03
  * @说明: 报刊相关控制器
  */
-@Controller
+@RestController
 public class NewspapersController {
     @Autowired
     private NewspapersService newspapersService;
@@ -63,7 +64,6 @@ public class NewspapersController {
      * @返回值: com.windmill.newspapers.pojo.Newspaper
      **/
     @RequestMapping("getNewspaper")
-    @ResponseBody
     public Map<String, Object> getNewspaper(Page page){
         PageHelper.startPage(page.getPage(),page.getLimit());
         List newspaperList = newspapersService.getNewspaper();
