@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
  * @创建时间: 2018/9/29 22:03
  * @说明: 拦截器类
  */
-//@Component
+@Component
 public class MyInterceptor implements HandlerInterceptor {
 
     @Override
