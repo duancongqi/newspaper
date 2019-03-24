@@ -314,21 +314,22 @@
             },
             dataType: "json",
             success: function(result){
+                var data = result.rows;
                 var html = "";
-                if(result.length>=5){
+                if(data.length>=5){
                     for (var i=0;i<5;i++){
-                        hrefs = "getNewspaperById?newsId="+result[i].newsId;
+                        hrefs = "getNewspaperById?newsId="+data[i].newsId;
                         html +="<li style='list-style-type:circle;'>" +
-                            "<a target=\"_blank\" href='"+hrefs+"'>"+result[i].newsTitle+"</a>" +
+                            "<a target=\"_blank\" href='"+hrefs+"'>"+data[i].newsTitle+"</a>" +
                             "</li>" +
                             "<br/>" ;
                     }
                     $("#apendUL").append(html);
                 }else{
-                    $.each(result, function(i) {
-                        hrefs = "getNewspaperById?newsId="+result[i].newsId;
+                    $.each(data, function(i) {
+                        hrefs = "getNewspaperById?newsId="+data[i].newsId;
                         html +="<li style='list-style-type:circle;'>" +
-                            "<a target=\"_blank\" href='"+hrefs+"'>"+result[i].newsTitle+"</a>" +
+                            "<a target=\"_blank\" href='"+hrefs+"'>"+data[i].newsTitle+"</a>" +
                             "</li>" +
                             "<br/>" ;
                     });
