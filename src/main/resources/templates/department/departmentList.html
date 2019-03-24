@@ -56,15 +56,8 @@
     function addDepartment(){
         BootstrapDialog.show({
             title:"添加部门",
-            closable: false,
+            //closable: false,
             message:$('<div><div>').load('/toInsertDepartment'),
-            buttons:[{
-                label:"取消",
-                cssClass:'btn-warning',
-                action:function(data){
-                    data.close();
-                }
-            }]
         })
     }
     //修改部门
