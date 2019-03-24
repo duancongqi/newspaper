@@ -35,6 +35,7 @@ public class JumpController {
     private LoginService loginService;
     @Autowired
     private CheckWorkService checkWorkService;
+
     /**
      * @作者: 段大神经
      * @功能描述: 首页面
@@ -231,6 +232,20 @@ public class JumpController {
     @GetMapping("toShowLogo")
     public String toShowLogo(){
         return "common/welcome";
+    }
+
+    /**
+     * @作者: 段大神经
+     * @功能描述: 新闻修改页面
+     * @时间: 2019/3/11 16:22
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("updateNews")
+    public String updateNews(Model model,Newspaper newspaper){
+        Newspaper newspaperById = newspapersService.getNewspaperById(newspaper);
+        model.addAttribute("thisEntity",newspaperById);
+        return "newspapers/updnwes";
     }
 }
 
