@@ -63,7 +63,7 @@
                     cssClass: 'btn-primary',
                     action: function(dialogItself){
                         $.ajax({
-                            url:"/deleteUser",
+                            url:"/delNewspaper",
                             data:{
                                 "newsId":ids
                             },
@@ -157,8 +157,11 @@
                         return;
                     }
                     $.ajax({
-                        url:"/createUser",
-                        data:{},
+                        url:"/createNewspaper",
+                        data:{
+                            newsTitle:$("#add_News_title").val(),
+                            newsNote:schoolAddEditor.getPlainTxt()
+                        },
                         dataType:"text",
                         type:"post",
                         success:function(date){
