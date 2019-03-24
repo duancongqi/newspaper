@@ -27,7 +27,7 @@
         striped:true,
         queryParams:function(){
             return{
-                "page":(this.pageNumber-1)*this.pageSize,
+                "page":this.pageNumber-1,
                 "limit":this.pageSize,
             }
         },
@@ -39,11 +39,11 @@
             {field:'userName',title:'成员',align:'center',width:400},
             {field:'isArrive',title:'操作',align:'center',width:350,formatter:function(value,rows,index){
                     var str="";
-                    if(value == "0") {
-                        str+="<button class='btn btn-info dim' type='button' onclick='updateCheckWork(\""+rows.cwId+"\",1)' ><i class='fa fa-paste'></i>未到</button>";
+                    if(value == "1") {
+                        str+="<button class='btn btn-info dim' type='button' onclick='updateCheckWork(\""+rows.cwId+"\",0)' ><i class='fa fa-paste'></i>未到</button>";
                         return str;
                     }else{
-                        str+="<button class='btn btn-info dim' type='button' onclick='updateCheckWork(\""+rows.cwId+"\",0)' ><i class='fa fa-paste'></i>已到</button>";
+                        str+="<button class='btn btn-info dim' type='button' onclick='updateCheckWork(\""+rows.cwId+"\",1)' ><i class='fa fa-paste'></i>已到</button>";
                         return str;
                     }
                 }

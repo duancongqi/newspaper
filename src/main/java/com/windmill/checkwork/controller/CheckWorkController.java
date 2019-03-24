@@ -33,7 +33,7 @@ public class CheckWorkController {
      **/
     @RequestMapping("createCheckWork")
     public ResultUtil createCheckWork(CheckWork checkWork){
-        List list = checkWorkService.findCheckWorkByNow();
+        List list = checkWorkService.findCheckWorkByNow(checkWork);
         if (!CollectionUtils.isEmpty(list)){
             return ResultUtil.builder().code("2").msg("今天签完到，请确认").build();
         }
@@ -68,6 +68,21 @@ public class CheckWorkController {
     @RequestMapping("updateCheckWork")
     public ResultUtil updateCheckWork(CheckWork checkWork){
         int i = checkWorkService.updateCheckWork(checkWork);
+        if (i > 0){
+            return ResultUtil.builder().code("1").build();
+        }
+        return ResultUtil.builder().code("2").msg("修改失败").build();
+    }
+    /**
+     * @作者: 段大神经
+     * @功能描述: 修改考勤
+     * @时间: 2019/3/21 17:47
+     * @参数:  * @param checkWork
+     * @返回值: com.windmill.utils.ResultUtil
+     **/
+    @RequestMapping("updateCheckWorks")
+    public ResultUtil updateCheckWorks(CheckWork checkWork){
+        int i = checkWorkService.updateCheckWorks(checkWork);
         if (i > 0){
             return ResultUtil.builder().code("1").build();
         }

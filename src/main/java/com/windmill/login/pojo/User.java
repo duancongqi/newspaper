@@ -50,4 +50,8 @@ public class User {
      * QQ
      */
     private String userQq;
+    /**
+     * 是否考勤  0未到，1已到
+     */
+    private String isArrive;
 }

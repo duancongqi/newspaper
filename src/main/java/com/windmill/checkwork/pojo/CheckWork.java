@@ -37,5 +37,9 @@ public class CheckWork {
      * 创建时间
      */
     private LocalDateTime cwCreateTime;
+    /**
+     * 用户id
+     */
+    private Integer userId;
 
 }
