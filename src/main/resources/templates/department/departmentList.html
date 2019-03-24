@@ -155,7 +155,7 @@
         }
     }
     //删除
-    function delDepartment(id){
+    function delDepartment(ids){
         if(ids!=""){
             BootstrapDialog.show({
                 title:"删除确认",
@@ -167,7 +167,7 @@
                         $.ajax({
                             url:"/delDepartment",
                             data:{
-                                "depId":id
+                                "depId":ids
                             },
                             dataType:"text",
                             type:"post",
