@@ -1,7 +1,11 @@
 package com.windmill.newspapers.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.windmill.department.pojo.Department;
 import com.windmill.newspapers.pojo.Newspaper;
 import com.windmill.newspapers.service.NewspapersService;
+import com.windmill.utils.Page;
 import com.windmill.utils.ResultUtil;
 import com.windmill.utils.Uploader;
 import org.apache.commons.lang.StringUtils;
@@ -13,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @类名称：NewspapersController
@@ -59,8 +64,11 @@ public class NewspapersController {
      **/
     @RequestMapping("getNewspaper")
     @ResponseBody
-    public List<Newspaper> getNewspaper(){
-        return newspapersService.getNewspaper();
+    public Map<String, Object> getNewspaper(Page page){
+        PageHelper.startPage(page.getPage(),page.getLimit());
+        List newspaperList = newspapersService.getNewspaper();
+        PageInfo<Newspaper> pageInfo = new PageInfo<>(newspaperList);
+        return ResultUtil.multidata(pageInfo.getList(),pageInfo.getTotal());
     }
 
 

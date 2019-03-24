@@ -11,7 +11,9 @@
         </i>添加
     </button>
 </div>
-<table id="news_show"></table>
+<table id="news_show">
+
+</table>
 </body>
 <script type="text/javascript">
     $("#news_show").bootstrapTable({
@@ -63,7 +65,7 @@
                     cssClass: 'btn-primary',
                     action: function(dialogItself){
                         $.ajax({
-                            url:"/delNewspaper",
+                            url:"delNewspaper",
                             data:{
                                 "newsId":ids
                             },
@@ -112,7 +114,7 @@
                         $.ajax({
                             url:"/updateNewspaper",
                             data:{},
-                            dataType:"text",
+                            dataType:"json",
                             type:"post",
                             success:function(data){
                                 dialogItself.close();
@@ -157,12 +159,12 @@
                         return;
                     }
                     $.ajax({
-                        url:"/createNewspaper",
+                        url:"createNewspaper",
                         data:{
                             newsTitle:$("#add_News_title").val(),
                             newsNote:newsAddEditor.getPlainTxt()
                         },
-                        dataType:"text",
+                        dataType:"json",
                         type:"post",
                         success:function(date){
                             dialogItself.close();
