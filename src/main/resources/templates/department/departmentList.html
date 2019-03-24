@@ -39,9 +39,9 @@
             {field:'depId',align:'center',width:50,visible: false},
             {field:'depName',title:'部门名称',align:'center',width:400},
             {field:'depFunction',title:'部门职能',align:'center',width:500},
-            {field:'tp',title:'部门图片',align:'center',width:350,formatter:function(value,rows,index){
+            {field:'depPhoto',title:'部门图片',align:'center',width:350,formatter:function(value,rows,index){
                 var str="";
-                str+="<a><img width='210' class='picture-thumb' src= \""+rows.depPhoto+"\"></a>";
+                str+="<img width='210' class='picture-thumb' src= \""+value+"\">";
                 return  str;
             }
             },{field:'cc',title:'操作',align:'center',width:350,formatter:function(value,rows,index){
@@ -65,15 +65,8 @@
         if(id != ""){
             BootstrapDialog.show({
                 title:"修改部门",
-                closable: false,
+                //closable: false,
                 message:$('<div><div>').load('/toUpdateDepartment?depId='+id),
-                buttons:[{
-                    label:"取消",
-                    cssClass:'btn-warning',
-                    action:function(data){
-                        data.close();
-                    }
-                }]
             })
         }
     }
