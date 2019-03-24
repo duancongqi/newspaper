@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 
 /**
  * @类名称：JumpController
@@ -43,7 +44,7 @@ public class JumpController {
     }
     /**
      * @作者: 老西儿
-     * @功能描述: //TODO
+     * @功能描述: 去管理用中心页面
      * @时间: 2019/3/21 22:15
      * @参数:  * @param null
      * @返回值: java.lang.String
@@ -101,7 +102,7 @@ public class JumpController {
     public String getNewspaperById(Newspaper newspaper, Model model){
         Newspaper news = newspapersService.getNewspaperById(newspaper);
         model.addAttribute("thisEntity",news);
-        return "show";
+        return "firstshow/newsShow";
     }
 
     /**
@@ -115,7 +116,7 @@ public class JumpController {
     public String getDepartmentById(@RequestParam Integer depId,Model model){
         Department department = departmentService.getDepartmentById(depId);
         model.addAttribute("thisEntity",department);
-        return "deptShow";
+        return "firstshow/deptShow";
     }
     /**
      * @作者: 段大神经
@@ -165,16 +166,28 @@ public class JumpController {
      * @作者: 跳转添加成员页面
      * @功能描述: //TODO
      * @时间: 2019/3/24 19:04
-     * @参数:  * @param request
-     * @param model
-     * @返回值: java.lang.String
-     **/
-    @GetMapping("toUpdUser")
-    public String toUpdUser(HttpServletRequest request,Model model){
+        * @参数:  * @param request
+        * @param model
+        * @返回值: java.lang.String
+        **/
+@GetMapping("toUpdUser")
+public String toUpdUser(HttpServletRequest request,Model model){
         User user = new User();
         user.setUserId(Integer.valueOf(request.getParameter("userId")));
         List<User> users = loginService.getUserByWhere(user);
         model.addAttribute("userlist",users);
         return "user/updUser";
-    }
-}
+        }
+/**
+ * @作者: 段大神经
+ * @功能描述: 退出方法
+ * @时间: 2019/3/12 21:53
+ * @参数:  * @param session
+ * @返回值: java.lang.String
+ **/
+@GetMapping("logout")
+public String logout(HttpSession session){
+        session.removeAttribute("user");
+        return "redirect:/";
+        }
+        }
