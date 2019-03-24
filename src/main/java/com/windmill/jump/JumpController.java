@@ -30,7 +30,7 @@ public class JumpController {
      * @参数:  * @param
      * @返回值: java.lang.String
      **/
-    @RequestMapping("index")
+    @RequestMapping(value = {"index","/"})
     public String index(){
         return "index";
     }
