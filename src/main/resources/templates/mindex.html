@@ -6,22 +6,28 @@
     <!-- 引入核心js,css文件 -->
     <footer th:replace="common/jscore" />
 </head>
+<style>
+    .navbar-inverse {
+        background-color: #6db2ef;
+        border-color: #5ec0ca;
+    }
+</style>
 <body>
 <!--顶部导航栏部分-->
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" title="logoTitle" href="#">
-                <div style="float: left;margin-left: 20px">民大IT报</div>
+                <div style="float: left;margin-left: 20px;color:white;">民大IT报</div>
             </a>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li role="presentation">
-                    <a href="#">当前用户：[[${session.user.userName}]]<span class="badge"></span></a>
+                    <a href="#" style="color:white;">当前用户：[[${session.user.userName}]]<span class="badge"></span></a>
                 </li>
                 <li>
-                    <a th:href="@{/logout}">
+                    <a th:href="@{/logout}" style="color:white;">
                         <span class="glyphicon glyphicon-lock"></span>退出登录</a>
                 </li>
             </ul>
@@ -31,7 +37,7 @@
 <!-- 中间主体内容部分 -->
 <div class="pageContainer">
     <!-- 左侧导航栏 -->
-    <div class="pageSidebar">
+    <div class="pageSidebar" style="font-size: 15px">
         <ul class="nav nav-stacked nav-pills">
             <li role="presentation">
                 <a th:href="@{/toDepartment}" target="mainFrame" >部门管理</a>
