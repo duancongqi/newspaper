@@ -20,17 +20,9 @@
         contentType : "application/x-www-form-urlencoded",//必须的否则条件查询时会乱码
         //查询参数：条件查询时使用
         toolbar:'#toolbar',
-        pagination:true, //是否展示分页
-        pageList:[5, 10],//分页组件
-        pageNumber:1,
-        pageSize:5,//默认每页条数
-        method:'get',//发送请求的方式
-        clickToSelect: true, //是否启用点击选中行
-        sidePagination:'server',//分页方式：client客户端分页，server服务端分页（*
-        striped:true,
-        queryParams:function(){
+        queryParams:function(params){
             return{
-                "page":(this.pageNumber-1)*this.pageSize,
+                "page":this.pageNumber,
                 "limit":this.pageSize,
             }
         },
@@ -50,43 +42,154 @@
                     str+="<button class='btn btn-info dim' type='button' onclick='updateDepartment(\""+rows.depId+"\")' ><i class='fa fa-paste'></i>修改</button>";
                     return  str;
                 }
-            }]
+            }],
+        pagination:true,
+        pageNumber:1,
+        pageSize:5,
+        pageList:[5,10,15],
+        clickToSelect: true,
+        cache搜索: false,
+        sidePagination:"server"
     })
-    //添加部门
+    //添加
     function addDepartment(){
         BootstrapDialog.show({
-            title:"添加部门",
-            //closable: false,
+            title:"添加",
+            closable: false,
             message:$('<div><div>').load('/toInsertDepartment'),
+            buttons:[{
+                label:"提交",
+                cssClass:'btn-primary',
+                action:function(dialogItself){
+                    var checkSaveDep = saveDepartment();
+                    if (!checkSaveDep){
+                        return;
+                    }
+                    var departmentnames = $("#depName").val().trim();
+                    var depfunction = $("#depFunction").val().trim();
+                    var file = document.getElementById("depImg").files[0];
+                    var formData = new FormData();
+                    formData.append('depName', departmentnames);
+                    formData.append('depFunction', depfunction);
+                    formData.append('depImg', file);
+                    $.ajax({
+                        url: "/createDepartment",
+                        type: "post",
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        mimeType: "multipart/form-data",
+                        success:function(date){
+                            dialogItself.close();
+                            $("#departmentTable").bootstrapTable('refresh',{pageNumber:1});
+                        },
+                        error:function(){
+                            BootstrapDialog.show({
+                                title:"fuck！！",
+                                message:'哇哦！系统走丢了！！'
+                            })
+                        }
+                    })
+                }
+            },{
+                label:"取消",
+                cssClass:'btn-warning',
+                action:function(data){
+                    data.close();
+                }
+            }]
         })
     }
-    //修改部门
-    function updateDepartment(id){
-        if(id != ""){
+    //修改方法
+    function updateDepartment(ids){
+        if(ids!=""){
             BootstrapDialog.show({
-                title:"修改部门",
-                //closable: false,
-                message:$('<div><div>').load('/toUpdateDepartment?depId='+id),
-            })
+                title:"修改页面",
+                closable: false,
+                message:$('<div><div>').load('/toUpdateDepartment?depId='+ids),
+                buttons: [ {
+                    label: '保存',
+                    cssClass: 'btn-primary',
+                    action: function(dialogItself){
+                        var checkUpdateDepartments=chenckDepForm();
+                        if(!checkUpdateDepartments){
+                            return;
+                        }
+                        var depIds = $("#depId").val();
+                        var departmentnames = $("#depName").val().trim();
+                        var depfunction = $("#depFunction").val().trim();
+                        var file = document.getElementById("depImg").files[0];
+                        var formData = new FormData();
+                        formData.append("depId",depIds);
+                        formData.append('depName', departmentnames);
+                        formData.append('depFunction', depfunction);
+                        formData.append('depImg', file);
+                        $.ajax({
+                            url: "/updateDepartment",
+                            type: "post",
+                            data: formData,
+                            contentType: false,
+                            processData: false,
+                            mimeType: "multipart/form-data",
+                            success:function(data){
+                                dialogItself.close();
+                                $("#departmentTable").bootstrapTable('refresh',{pageNumber:1});
+                            },
+                            error:function(){
+                                BootstrapDialog.show({
+                                    title:"温馨提示",
+                                    message: '系统出现BUG！请联系管理员！'
+                                });
+                            }
+
+                        })
+                    }
+                }, {
+                    label: '取消',
+                    cssClass: 'btn-warning ',
+                    action: function(dialogItself){
+                        dialogItself.close();
+                    }
+                }]
+            });
         }
     }
+    //删除
     function delDepartment(id){
-        if(id != ""){
-            $.ajax({
-                url:'/delDepartment',
-                type:'post',
-                data:{
-                    depId:id
-                },
-                dataType:'json',
-                success:function(data){
-                    if (data) {
-                        window.location.href = "";
-                    }else {
-                        bootbox.alert('删除数据失败');
+        if(ids!=""){
+            BootstrapDialog.show({
+                title:"删除确认",
+                message:"确定要删除吗？",
+                buttons: [ {
+                    label: '确认',
+                    cssClass: 'btn-primary',
+                    action: function(dialogItself){
+                        $.ajax({
+                            url:"/delDepartment",
+                            data:{
+                                "depId":id
+                            },
+                            dataType:"text",
+                            type:"post",
+                            success:function(data){
+                                dialogItself.close();
+                                $("#departmentTable").bootstrapTable('refresh',{pageNumber:1});
+                            },
+                            error:function(){
+                                BootstrapDialog.show({
+                                    message: '系统出现BUG！请联系管理员！'
+                                });
+                            }
+                        })
                     }
-                }
-            })
+                }, {
+                    label: '取消',
+                    cssClass: 'btn-warning ',
+                    action: function(dialogItself){
+                        dialogItself.close();
+                    }
+                }]
+            });
         }
     }
 </script>
