@@ -44,52 +44,52 @@
             </div>
         </form>
     </div>
-<script>
+</body>
+<script type="text/javascript">
     //html5实现图片预览功能
     $(function () {
-    $("#depImg").change(function (e) {
-        var file = e.target.files[0] || e.dataTransfer.files[0];
-        $('#photoCover').val(document.getElementById("depImg").files[0].name);
-        if (file) {
-            var reader = new FileReader();
-            reader.onload = function () {
-                $("#files").attr("src", this.result);
+        $("#depImg").change(function (e) {
+            var file = e.target.files[0] || e.dataTransfer.files[0];
+            $('#photoCover').val(document.getElementById("depImg").files[0].name);
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function () {
+                    $("#files").attr("src", this.result);
+                }
+                reader.readAsDataURL(file);
             }
-            reader.readAsDataURL(file);
-        }
-    });
+        });
     })
-        function saveDepartment() {
-            if($("#depName").val()==""){
-                alert("请输入部门名称")
-                return false;
-            }else if($("#depFunction").val()==""){
-                alert("请输入部门职能")
-                return false;
-            }else{
-                var departmentnames = $("#depName").val().trim();
-                var depfunction = $("#depFunction").val().trim();
-                var file = document.getElementById("depImg").files[0];
-                var formData = new FormData();
-                formData.append('depName', departmentnames);
-                formData.append('depFunction', depfunction);
-                formData.append('depImg', file);
-                $.ajax({
-                    url: "/createDepartment",
-                    type: "post",
-                    data: formData,
-                    contentType: false,
-                    processData: false,
-                    mimeType: "multipart/form-data",
-                    success: function () {
-                        window.location.href = "";
-                    },
-                    error: function (data) {
-                        console.log(data);
-                    }
-                });
-            }
+    function saveDepartment() {
+        if($("#depName").val()==""){
+            alert("请输入部门名称")
+            return false;
+        }else if($("#depFunction").val()==""){
+            alert("请输入部门职能")
+            return false;
+        }else{
+            var departmentnames = $("#depName").val().trim();
+            var depfunction = $("#depFunction").val().trim();
+            var file = document.getElementById("depImg").files[0];
+            var formData = new FormData();
+            formData.append('depName', departmentnames);
+            formData.append('depFunction', depfunction);
+            formData.append('depImg', file);
+            $.ajax({
+                url: "/createDepartment",
+                type: "post",
+                data: formData,
+                contentType: false,
+                processData: false,
+                mimeType: "multipart/form-data",
+                success: function () {
+                    window.location.href = "";
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+        }
     }
 </script>
-</body>
 </html>

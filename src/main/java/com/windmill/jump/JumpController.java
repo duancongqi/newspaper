@@ -69,6 +69,14 @@ public class JumpController {
     public String toInsertDepartment(){
         return "department/addDepartment";
     }
+    /**
+     * @作者: 老西儿
+     * @功能描述: 跳转部门修改页面
+     * @时间: 2019/3/24 15:00
+     * @参数:  * @param request
+     * @param modle
+     * @返回值: java.lang.String
+     **/
     @GetMapping("toUpdateDepartment")
     public String toUpdateaDepartment(HttpServletRequest request,Model modle){
         Department department = new Department();
@@ -103,5 +111,16 @@ public class JumpController {
         Department department = departmentService.getDepartmentById(depId);
         model.addAttribute("thisEntity",department);
         return "deptShow";
+    }
+    /**
+     * @作者: 老西儿
+     * @功能描述: 跳转成员管理页面
+     * @时间: 2019/3/24 15:13
+     * @参数:  * @param null
+     * @返回值:
+     **/
+    @GetMapping("toUser")
+    public String toUser(){
+        return "user/userList";
     }
 }
