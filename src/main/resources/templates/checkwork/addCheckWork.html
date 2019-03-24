@@ -1,0 +1,103 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>成员管理</title>
+    <!-- 引入js核心文件 -->
+    <footer th:replace="common/jscore" />
+</head>
+<body>
+<button class="btn btn-info dim" type="button" onclick="fhCheckWork()">返回</button>
+
+</button>
+<table id="checkWordTable"></table>
+</body>
+<script type="text/javascript">
+    $("#checkWordTable").bootstrapTable({
+        url:"/findCheckWork",
+        contentType : "application/x-www-form-urlencoded",//必须的否则条件查询时会乱码
+        //查询参数：条件查询时使用
+        toolbar:'#toolbar',
+        pagination:true, //是否展示分页
+        pageList:[5, 10,15],//分页组件
+        pageNumber:1,
+        pageSize:5,//默认每页条数
+        method:'get',//发送请求的方式
+        clickToSelect: true, //是否启用点击选中行
+        sidePagination:'server',//分页方式：client客户端分页，server服务端分页（*
+        striped:true,
+        queryParams:function(){
+            return{
+                "page":(this.pageNumber-1)*this.pageSize,
+                "limit":this.pageSize,
+            }
+        },
+        columns:[
+            {checkbox:true},
+            {field:'cwId',align:'center',width:50,visible: false},
+            {field:'userId',align:'center',width:50,visible: false},
+            {field:'depName',title:'部门名称',align:'center',width:400},
+            {field:'userName',title:'成员',align:'center',width:400},
+            {field:'isArrive',title:'操作',align:'center',width:350,formatter:function(value,rows,index){
+                    var str="";
+                    if(value == "0") {
+                        str+="<button class='btn btn-info dim' type='button' onclick='updateCheckWork(\""+rows.cwId+"\",1)' ><i class='fa fa-paste'></i>未到</button>";
+                        return str;
+                    }else{
+                        str+="<button class='btn btn-info dim' type='button' onclick='updateCheckWork(\""+rows.cwId+"\",0)' ><i class='fa fa-paste'></i>已到</button>";
+                        return str;
+                    }
+                }
+            }]
+    })
+    function kqCheckWork(){
+        var rows=$('#checkWordTable').bootstrapTable('getSelections');
+        if(rows.length<=0){
+            BootstrapDialog.show({
+                title:"温馨提示",
+                message: '请选择要删除的数据'
+            });
+        }else{
+            var ids ="";
+            for (var i = 0; i < rows.length; i++) {
+                ids += ids == "" ? rows[i].userId : "," + rows[i].userId;
+            }
+            $.ajax({
+                url:'createCheckWork',
+                type:'post',
+                data:{
+                    "userIds":ids
+                },
+                dataType:'json',
+                success:function(data){
+                    if (data) {
+                    }else {
+                    }
+                }
+            })
+        }
+    }
+    function updateCheckWork(id,kqs){
+        $.ajax({
+            url:"/updateCheckWork",
+            data:{
+                "cwId":id,
+                "isArrive":kqs,
+            },
+            dataType:"text",
+            type:"post",
+            success:function(date){
+                $("#checkWordTable").bootstrapTable('refresh',{pageNumber:1});
+            },
+            error:function(){
+                BootstrapDialog.show({
+                    title:"fuck！！",
+                    message:'哇哦！系统走丢了！！'
+                })
+            }
+        })
+    }
+    function fhCheckWork(){
+        window.location.href = "toCheckWorkList"
+    }
+</script>
+</html>
