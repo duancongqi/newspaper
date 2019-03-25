@@ -16,6 +16,10 @@
     <select id="findDepartment" resultType="com.windmill.department.pojo.Department">
         SELECT * FROM t_dapartment
     </select>
+    <!-- 根据部门名称查询部门编号 -->
+    <select id="getDepartmentIdByName" resultType="integer" parameterType="string">
+        SELECT dep_id FROM t_dapartment WHERE dep_name = #{depName}
+    </select>
     <!-- 添加部门 -->
     <insert id="createDepartment" parameterType="com.windmill.department.pojo.Department" >
       INSERT INTO t_dapartment(dep_name,dep_function,dep_photo) VALUE (#{depName},#{depFunction},#{depPhoto})

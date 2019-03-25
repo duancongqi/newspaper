@@ -3,6 +3,7 @@ package com.windmill.newspapers.mapper;
 import com.windmill.newspapers.pojo.Newspaper;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @接口名称：NewspapersMapper
@@ -20,4 +21,6 @@ public interface NewspapersMapper {
     int delNewspaper(Newspaper newspaper);
 
     List<Newspaper> getNewspaper();
+
+    int createNewsAndDepRelation(Map<String, Object> map);
 }

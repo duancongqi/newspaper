@@ -11,11 +11,13 @@ import java.util.List;
  * @说明:
  */
 public interface CheckWorkMapper {
-    void createCheckWork(CheckWork checkWork);
+    int createCheckWork(CheckWork checkWork);
 
     List<CheckWork> findCheckWorkByWhere(CheckWork checkWork);
 
-    List findCheckWorkByNow();
+    List findCheckWorkByNow(CheckWork checkWork);
 
     int updateCheckWork(CheckWork checkWork);
+
+    int updateCheckWorks(CheckWork checkWork);
 }

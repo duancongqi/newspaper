@@ -3,6 +3,8 @@ package com.windmill.newspapers.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.windmill.department.pojo.Department;
+import com.windmill.department.service.DepartmentService;
+import com.windmill.login.pojo.User;
 import com.windmill.newspapers.pojo.Newspaper;
 import com.windmill.newspapers.service.NewspapersService;
 import com.windmill.utils.Page;
@@ -19,6 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,6 +36,8 @@ import java.util.Map;
 public class NewspapersController {
     @Autowired
     private NewspapersService newspapersService;
+    @Autowired
+    private DepartmentService departmentService;
     /**
      * @作者: 段大神经
      * @功能描述: umediter上传方法
@@ -82,7 +88,7 @@ public class NewspapersController {
      * @返回值: com.windmill.utils.ResultUtil
      **/
     @RequestMapping("createNewspaper")
-    public ResultUtil createNewspaper(Newspaper newspaper){
+    public ResultUtil createNewspaper(Newspaper newspaper, HttpSession session){
         if (StringUtils.isBlank(newspaper.getNewsNote())){
             return ResultUtil.builder().code("2").msg("内容为空").build();
         }
@@ -90,7 +96,13 @@ public class NewspapersController {
             return ResultUtil.builder().code("2").msg("标题为空").build();
         }
         int i = newspapersService.createNewspaper(newspaper);
-        if (i > 0){
+        User user = (User)session.getAttribute("user");
+        Integer depId = departmentService.getDepartmentIdByName(user.getDepName());
+        Map<String,Object> map = new HashMap<>();
+        map.put("depId",depId);
+        map.put("newsId",newspaper.getNewsId());
+        int j = newspapersService.createNewsAndDepRelation(map);
+        if (i > 0 && j > 0){
             return ResultUtil.builder().code("1").build();
         }
         return ResultUtil.builder().code("2").msg("添加失败").build();

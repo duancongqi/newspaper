@@ -25,7 +25,7 @@ public class CheckWorkServiceImpl implements CheckWorkService {
     @Autowired
     private LoginMapper loginMapper;
     @Override
-    public void createCheckWork(CheckWork checkWork) {
+    public int createCheckWork(CheckWork checkWork) {
         List<String> list = checkWork.getUserIds();
         User user = new User();
         list.forEach(l->{
@@ -40,7 +40,7 @@ public class CheckWorkServiceImpl implements CheckWorkService {
                 checkWorkMapper.createCheckWork(checkWork);
             }
         });
-        checkWorkMapper.createCheckWork(checkWork);
+        return checkWorkMapper.createCheckWork(checkWork);
     }
 
     @Override
@@ -49,12 +49,31 @@ public class CheckWorkServiceImpl implements CheckWorkService {
     }
 
     @Override
-    public List findCheckWorkByNow() {
-        return checkWorkMapper.findCheckWorkByNow();
+    public List findCheckWorkByNow(CheckWork checkWork) {
+        return checkWorkMapper.findCheckWorkByNow(checkWork);
     }
 
     @Override
     public int updateCheckWork(CheckWork checkWork) {
         return checkWorkMapper.updateCheckWork(checkWork);
+    }
+
+    @Override
+    public int updateCheckWorks(CheckWork checkWork) {
+        User user = new User();
+        user.setUserId(checkWork.getUserId());
+        List<User> userByWhere = loginMapper.getUserByWhere(user);
+        if (!CollectionUtils.isEmpty(userByWhere)){
+            checkWork.setUserName(userByWhere.get(0).getUserName());
+        }else{
+            return 0;
+        }
+        List<CheckWork> checkWorkByWhere = checkWorkMapper.findCheckWorkByNow(checkWork);
+        if (CollectionUtils.isEmpty(checkWorkByWhere)){
+            checkWork.setDepName(userByWhere.get(0).getDepName());
+            checkWork.setIsArrive("1");
+            return checkWorkMapper.createCheckWork(checkWork);
+        }
+        return checkWorkMapper.updateCheckWorks(checkWork);
     }
 }

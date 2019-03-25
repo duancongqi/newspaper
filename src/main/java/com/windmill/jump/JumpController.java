@@ -55,7 +55,7 @@ public class JumpController {
      **/
     @RequestMapping("toMindex")
     public String toList(){
-        return "toMindex";
+        return "mindex";
     }
     /**
      * @作者: 老西儿
@@ -215,6 +215,17 @@ public class JumpController {
     @GetMapping("toInsertCheckWork")
     public String toInsertCheckWork(){
         return "checkwork/addCheckWork";
+    }
+    /**
+     * @作者: 段大神经
+     * @功能描述: 主展示区欢迎图片
+     * @时间: 2019/3/11 16:22
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("toShowLogo")
+    public String toShowLogo(){
+        return "common/welcome";
     }
     }
 

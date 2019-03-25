@@ -2,6 +2,8 @@ package com.windmill.login.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.windmill.checkwork.pojo.CheckWork;
+import com.windmill.checkwork.service.CheckWorkService;
 import com.windmill.login.pojo.User;
 import com.windmill.login.service.LoginService;
 import com.windmill.utils.Page;
@@ -27,6 +29,8 @@ import java.util.Map;
 public class LoginController {
     @Autowired
     private LoginService loginService;
+    @Autowired
+    private CheckWorkService checkWorkService;
     /**
      * @作者: 段大神经
      * @功能描述: 登陆
@@ -90,9 +94,20 @@ public class LoginController {
     public Map findUser(Page page,User user){
         PageHelper.startPage(page.getPage(),page.getLimit());
         List<User> list = loginService.getUserByWhere(user);
+        list.forEach(u -> {
+            CheckWork checkWork = new CheckWork();
+            checkWork.setUserName(u.getUserName());
+            List<CheckWork> checkWorkByNow = checkWorkService.findCheckWorkByNow(checkWork);
+            if (!CollectionUtils.isEmpty(checkWorkByNow)){
+                u.setIsArrive(checkWorkByNow.get(0).getIsArrive());
+            }else {
+                u.setIsArrive("0");
+            }
+        });
         PageInfo<User> pageInfo = new PageInfo<>(list);
         return ResultUtil.multidata(list,pageInfo.getTotal());
     }
+
     /**
      * @作者: 段大神经
      * @功能描述: 根据id查询用户，用于修改回显

@@ -17,11 +17,18 @@
         ORDER BY cw_id DESC
     </select>
     <!-- 查询今天是否已经打卡 -->
-    <select id="findCheckWorkByNow" resultType="com.windmill.checkwork.pojo.CheckWork">
-        SELECT * FROM t_checkwork WHERE to_days(cw_createtime) = to_days(now());
+    <select id="findCheckWorkByNow" resultType="com.windmill.checkwork.pojo.CheckWork" parameterType="com.windmill.checkwork.pojo.CheckWork">
+        SELECT * FROM t_checkwork WHERE to_days(cw_createtime) = to_days(now())
+           <if test="userName != null">
+               AND user_name = #{userName}
+           </if>
     </select>
     <!-- 修改考勤 -->
     <update id="updateCheckWork" parameterType="com.windmill.checkwork.pojo.CheckWork">
         UPDATE t_checkwork SET is_arrive = #{isArrive} WHERE cw_id = #{cwId}
+    </update>
+    <!-- 修改考勤 -->
+    <update id="updateCheckWorks" parameterType="com.windmill.checkwork.pojo.CheckWork">
+        UPDATE t_checkwork SET is_arrive = #{isArrive} WHERE user_name = #{userName} AND to_days(cw_createtime) = to_days(now())
     </update>
 </mapper>
