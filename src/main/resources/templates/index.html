@@ -308,7 +308,7 @@
         //动态加载往期报纸
         $.ajax({
             type: "get",
-            url: "getNewspaper",
+            url: "/getNewspaper",
             data: {
                 // 'id' : null,
             },
@@ -341,7 +341,7 @@
         //动态加载部门下拉
         $.ajax({
             type: "get",
-            url: "findDepartment",
+            url: "/findDepartment",
             data: {
                 // 'id' : null,
             },
@@ -365,7 +365,7 @@
         var userName = $("#userName").val();
         var userPassword = $("#userPassword").val();
         $.ajax({
-            url:'login',
+            url:'/login',
             type:'get',
             data:{
                 "userName":userName,
@@ -377,7 +377,7 @@
                     alert(data.msg);
                 }else{
                     location.reload();
-                    location.href = "toMindex";
+                    location.href = "/toMindex";
                 }
             }
         })
