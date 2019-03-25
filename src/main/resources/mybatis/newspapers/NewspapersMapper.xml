@@ -27,4 +27,8 @@
     <delete id="delNewspaper" parameterType="com.windmill.newspapers.pojo.Newspaper">
         DELETE FROM t_news WHERE news_id = #{newsId}
     </delete>
+    <!-- 添加新闻 -->
+    <insert id="createNewsAndDepRelation" parameterType="map">
+        INSERT INTO t_depnewsrelation(dep_id,news_id)  VALUE (#{depId},#{newsId})
+    </insert>
 </mapper>

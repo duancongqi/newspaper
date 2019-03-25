@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @类名称：NewspapersServiceImpl
@@ -48,5 +49,10 @@ public class NewspapersServiceImpl implements NewspapersService {
     @Override
     public List<Newspaper> getNewspaper() {
         return newspapersMapper.getNewspaper();
+    }
+
+    @Override
+    public int createNewsAndDepRelation(Map<String, Object> map) {
+        return newspapersMapper.createNewsAndDepRelation(map);
     }
 }
