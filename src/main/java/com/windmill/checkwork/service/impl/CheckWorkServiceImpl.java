@@ -65,9 +65,11 @@ public class CheckWorkServiceImpl implements CheckWorkService {
         List<User> userByWhere = loginMapper.getUserByWhere(user);
         if (!CollectionUtils.isEmpty(userByWhere)){
             checkWork.setUserName(userByWhere.get(0).getUserName());
+        }else{
+            return 0;
         }
         List<CheckWork> checkWorkByWhere = checkWorkMapper.findCheckWorkByNow(checkWork);
-        if (!CollectionUtils.isEmpty(checkWorkByWhere) && checkWorkByWhere.get(0).getIsArrive() != "0"){
+        if (CollectionUtils.isEmpty(checkWorkByWhere)){
             checkWork.setDepName(userByWhere.get(0).getDepName());
             checkWork.setIsArrive("1");
             return checkWorkMapper.createCheckWork(checkWork);

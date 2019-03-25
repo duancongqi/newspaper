@@ -41,17 +41,15 @@
         columns:[
             {checkbox:true},
             {field:'userId',align:'center',width:50,visible: false},
-            {field:'depName',title:'部门名称',align:'center',width:400},
-            {field:'userName',title:'成员',align:'center',width:400},
-            {field:'isArrive',title:'操作',align:'center',width:350,formatter:function(value,rows,index){
+            {field:'depName',title:'部门名称',align:'center'},
+            {field:'userName',title:'成员',align:'center'},
+            {field:'isArrive',title:'操作',align:'center',formatter:function(value,rows,index){
                     var str="";
-                    var s = rows.isArrive;
-                    alert(s);
                     if(value == "1") {
                         str="<button class='btn btn-info dim' type='button' onclick='updateCheckWorks(\""+rows.userId+"\",0)' ><i class='fa fa-paste'></i>未到</button>";
                         return str;
                     }else{
-                        str="<button class='btn btn-info dim' type='button' onclick='updateCheckWorks(\""+rows.userId+"\",0)' ><i class='fa fa-paste'></i>已到</button>";
+                        str="<button class='btn btn-info dim' type='button' onclick='updateCheckWorks(\""+rows.userId+"\",1)' ><i class='fa fa-paste'></i>已到</button>";
                         return str;
                     }
                 }
@@ -97,7 +95,7 @@
                 "userId":id,
                 "isArrive":kqs,
             },
-            dataType:"text",
+            dataType:"json",
             type:"post",
             success:function(date){
                 $("#checkWordTable").bootstrapTable('refresh',{pageNumber:1});
