@@ -23,7 +23,7 @@
     <input type="text" name="userPhone" class="form-control" th:value="${user.userPhone}" id="userPhone">
     <label>所在部门</label>
     <select class="form-control" name="depName" id="depName">
-        <option value="0"  ><p th:text="${user.depName}">233</p></option>
+        <option th:value="${user.depName}"><p th:text="${user.depName}">233</p></option>
     </select>
     <label>QQ号：</label>
     <input type="text" name="userQq" class="form-control" th:value="${user.userQq}" id="userQq">
