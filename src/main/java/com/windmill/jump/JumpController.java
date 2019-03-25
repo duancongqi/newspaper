@@ -134,7 +134,7 @@ public class JumpController {
         return "newspapers/addnews";
     }
     /**
-     * @作者: 段大神经
+     * @作者: 段大神经fv
      * @功能描述: 去新闻管理页面
      * @时间: 2019/3/24 13:44
      * @参数:  * @param
@@ -227,5 +227,18 @@ public class JumpController {
     public String toShowLogo(){
         return "common/welcome";
     }
+    /**
+     * @作者: 段大神经
+     * @功能描述: 新闻修改页面
+     * @时间: 2019/3/11 16:22
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("updateNews")
+    public String updateNews(Model model,Newspaper newspaper){
+        Newspaper newspaperById = newspapersService.getNewspaperById(newspaper);
+        model.addAttribute("thisEntity",newspaperById);
+        return "newspapers/updnwes";
     }
+}
 
