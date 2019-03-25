@@ -20,4 +20,6 @@ public interface DepartmentService {
     int delDepartment(Department department);
 
     Department getDepartmentById(Integer depId);
+
+    Integer getDepartmentIdByName(String depName);
 }
