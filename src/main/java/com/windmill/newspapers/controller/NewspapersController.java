@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.windmill.department.pojo.Department;
 import com.windmill.department.service.DepartmentService;
 import com.windmill.login.pojo.User;
+import com.windmill.login.service.LoginService;
 import com.windmill.newspapers.pojo.Newspaper;
 import com.windmill.newspapers.service.NewspapersService;
 import com.windmill.utils.Page;
@@ -38,6 +39,8 @@ public class NewspapersController {
     private NewspapersService newspapersService;
     @Autowired
     private DepartmentService departmentService;
+    @Autowired
+    private LoginService loginService;
     /**
      * @作者: 段大神经
      * @功能描述: umediter上传方法
@@ -97,6 +100,8 @@ public class NewspapersController {
         }
         int i = newspapersService.createNewspaper(newspaper);
         User user = (User)session.getAttribute("user");
+        List<User> users = loginService.getUserByWhere(user);
+        user = users.get(0);
         Integer depId = departmentService.getDepartmentIdByName(user.getDepName());
         Map<String,Object> map = new HashMap<>();
         map.put("depId",depId);

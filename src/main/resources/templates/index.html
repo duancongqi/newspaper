@@ -221,13 +221,13 @@
         //动态加载部门下拉
         $.ajax({
             type: "get",
-            url: "/findDepartment",
+            url: "/findDepartments",
             data: {
                 // 'id' : null,
             },
             dataType: "json",
             success: function(result){
-                var data = result.rows;
+                var data = result;
                 var html = "";
                 $.each(data, function(i) {
                     hrefs = "getDepartmentByIds?depId="+data[i].depId;

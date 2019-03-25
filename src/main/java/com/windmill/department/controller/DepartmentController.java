@@ -43,6 +43,17 @@ public class DepartmentController {
     }
     /**
      * @作者: 段大神经
+     * @功能描述: 查询所有部门
+     * @时间: 2019/3/21 20:35
+     * @参数:  * @param
+     * @返回值: java.util.List
+     **/
+    @RequestMapping("findDepartments")
+    public List<Department> findDepartments(){
+        return departmentService.findDepartment();
+    }
+    /**
+     * @作者: 段大神经
      * @功能描述: 添加部门
      * @时间: 2019/3/21 20:45
      * @参数:  * @param department
