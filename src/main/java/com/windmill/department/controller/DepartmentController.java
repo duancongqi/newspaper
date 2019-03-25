@@ -84,10 +84,12 @@ public class DepartmentController {
         if (StringUtils.isBlank(department.getDepFunction())){
             return ResultUtil.builder().code("2").msg("部门职能为空").build();
         }
-        if (StringUtils.isNotBlank(department.getDepImg().toString())){
-            department.setDepPhoto(FileUtil.fileUpload(department.getDepImg(), request));
-        }else if (StringUtils.isBlank(department.getDepPhoto())){
-            return ResultUtil.builder().code("2").msg("部门图片为空").build();
+        if(department.getDepImg() != null){
+            if (StringUtils.isNotBlank(department.getDepImg().toString())){
+                department.setDepPhoto(FileUtil.fileUpload(department.getDepImg(), request));
+            }else if (StringUtils.isBlank(department.getDepPhoto())){
+                return ResultUtil.builder().code("2").msg("部门图片为空").build();
+            }
         }
         int i = departmentService.updateDepartment(department);
         if (i > 0){

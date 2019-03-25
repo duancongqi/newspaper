@@ -112,6 +112,7 @@
                     cssClass: 'btn-primary',
                     action: function(dialogItself){
                         var checkUpdateDepartments=chenckDepForm();
+                        debugger;
                         if(!checkUpdateDepartments){
                             return;
                         }
@@ -123,7 +124,10 @@
                         formData.append("depId",depIds);
                         formData.append('depName', departmentnames);
                         formData.append('depFunction', depfunction);
-                        formData.append('depImg', file);
+                        if(typeof (file) != "undefined"){
+                            formData.append('depImg', file);
+
+                        }
                         $.ajax({
                             url: "/updateDepartment",
                             type: "post",
