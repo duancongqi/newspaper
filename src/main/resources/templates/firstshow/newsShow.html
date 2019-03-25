@@ -9,8 +9,8 @@
 <style>
     #wrap {
         display:block;
-        bottom:20px;
-        right:185px
+        bottom:2.1%;
+        right:31%;
         !important;
         width:80px;
         line-height:30px;
@@ -21,22 +21,28 @@
         /*background:#000;*/
     }
 </style>
-<body style="width: 80%;margin-left: 10%">
-<div class="" style="height: 10%;margin-top: 50px;text-align: center">
-    <h1 id="newsTitle" >[[${thisEntity?.newsTitle}]]</h1>
-</div>
-<div class="container-fluid" style="height: 800px;margin-bottom: 20px">
-    <div class="row-fluid">
-        <div class="span12" th:utext="${thisEntity?.newsNote}">
+<body>
+<div style="width: 40%;margin-left: 30%;background:url(../../../image/bg-1.png);height: 932px">
+    <div class="container-fluid">
+        <div class="span12">
+            <h2>
+                <strong>[[${thisEntity?.newsTitle}]]</strong>
+            </h2>
         </div>
     </div>
+    <hr>
+    <div class="container-fluid">
+        <div class="row" style="margin-left: 10px">
+            <div class="span12" th:utext="${thisEntity?.newsNote}">
+            </div>
+        </div>
+    </div>
+    <div bgcolor="white"  style="text-align: center;float: left;margin-top: 91.1%;margin-left: 100px;">邮箱：xxxxxxxx@qq.com</div>
+    <div style="" id="wrap" >
+        <span bgcolor="white">民大IT报</span>
+        <img id="" th:src="@{image/2.jpg}" alt="Second slide" height="80px" width="80px">
+    </div>
 </div>
-<!--<img src="http://www.runoob.com/wp-content/uploads/2014/07/slide2.png" alt="Second slide" style="width: 100%;height: 2px">-->
-<div style="" id="wrap" >
-    <span bgcolor="white">民大IT报</span>
-    <img id="" th:src="@{/image/2.jpg}" alt="Second slide" height="80px" width="80px">
-</div>
-<div></div>
 </body>
 
 </html>

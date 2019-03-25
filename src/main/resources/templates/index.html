@@ -5,129 +5,9 @@
     <title>民大it报</title>
     <!-- 引入核心js,css文件 -->
     <footer th:replace="common/jscore" />
+    <link th:href="@{/js/core-css/vindex.css}" rel="stylesheet">
 </head>
-<style>
-    div.row {
-        border-top:1px solid #000
-    }
-    div {
-        text-align: center
-    }
-    .img {
-        width: 300px;
-        height: 300px;
-    }
-    a:hover,a:focus{
-        outline: none;
-        text-decoration: none;
-    }
-    .tab .nav-tabs{
-        position: relative;
-        border-bottom: none;
-    }
-    .tab .nav-tabs li{
-        text-align: center;
-        margin-right: 10px;
-    }
-    .tab .nav-tabs li a{
-        display: block;
-        font-size: 16px;
-        font-weight: 600;
-        color: #444;
-        padding: 10px 15px;
-        background: transparent;
-        margin-right: 0;
-        border: none;
-        border-radius: 0;
-        overflow: hidden;
-        position: relative;
-        z-index: 1;
-        transition: all 0.5s ease 0s;
-    }
-    .tab .nav-tabs li a:before{
-        content: "";
-        width: 100%;
-        height: 3px;
-        background: #de7921;
-        position: absolute;
-        top: 92%;
-        left: 0;
-        transition: all 0.3s ease 0s;
-    }
-    .tab .nav-tabs li a:hover:before,
-    .tab .nav-tabs li.active a:before,
-    .tab .nav-tabs li.active a:hover:before{
-        top: 0;
-    }
-    .tab .nav-tabs li a:after{
-        content: "";
-        width: 100%;
-        height: 100%;
-        background: #fff;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        z-index: -1;
-        transition: all 0.3s ease 0s;
-    }
-    .tab .nav-tabs li a:hover:after,
-    .tab .nav-tabs li.active a:after,
-    .tab .nav-tabs li.active a:hover:after{
-        top: 0;
-    }
-    .nav-tabs li.active a,
-    .nav-tabs li.active a:focus,
-    .nav-tabs li.active a:hover,
-    .nav-tabs li a:hover{
-        border: none;
-    }
-    .tab .tab-content{
-        padding: 30px 15px 20px;
-        background: #fff;
-        font-size: 14px;
-        color: #555;
-        line-height: 26px;
-    }
-    .tab .tab-content h3{
-        font-size: 24px;
-        margin-top: 0;
-    }
-    @media only screen and (max-width: 479px){
-        .tab .nav-tabs li{ width: 100%; }
-    }
-    .nav-tabs.nav-justified>.active>a, .nav-tabs.nav-justified>.active>a:focus, .nav-tabs.nav-justified>.active>a:hover {
-        border: 1px solid #801919;
-        background: #8ce4ec;
-    }
-    #wrap {
-        display:block;
-        bottom:0px;
-        right:185px
-        !important;
-        width:80px;
-        line-height:30px;
-        position:fixed;
-        border:1px solid #fff;
-        text-align:center;
-        color:#fff;
-        background:#000;
-    }
-    ul.b {list-style-type:square;}
-    pre {
-        display: block;
-        padding: 9.5px;
-        margin: 0 0 10px;
-        font-size: 13px;
-        line-height: 1.42857143;
-        color: #333;
-        word-break: break-all;
-        word-wrap: break-word;
-        background-color: #f5f5f5;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        height: 309px;
-    }
-</style>
+
 <body style="width: 80%;margin-left: 10%;">
 <div style="border: 1px">
         <div class="" style="height: 10%;margin-top: 50px">
@@ -139,9 +19,9 @@
 
         <div class="" style="height: 300px;overflow:hidden;">
             <ul class="nav nav-tabs nav-justified" >
-                <li role="presentation" class="active"><a href="#one" role="tab" data-toggle="tab">首页</a></li>
+                <li role="presentation" class="active"><a href="#one" role="tab" data-toggle="tab" style="font-size: 16px">首页</a></li>
                 <li role="presentation">
-                    <a href="#two" id="" class="dropdown-toggle" role="tab" data-toggle="tab">职能部门</a>
+                    <a href="#two" id="" class="dropdown-toggle" role="tab" data-toggle="tab" style="font-size: 16px">职能部门</a>
                     <div  class="dropdown">
                         <a href="#" id="myTabDrop1" class="dropdown-toggle"
                            data-toggle="dropdown">
@@ -154,7 +34,7 @@
                         </ul>
                     </div>
                 </li>
-                <li role="presentation"><a href="#three" role="tab" data-toggle="tab">报社概况</a></li>
+                <li role="presentation"><a href="#three" role="tab" data-toggle="tab" style="font-size: 16px">报社概况</a></li>
 
             </ul>
 
@@ -213,10 +93,10 @@
                 <div role="tabpanel" class="tab-pane fade" id="three" >
                     <pre style="font-size: 20px">
 
-<p style="float: left;margin-left: 18%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;《民大IT报》成立于2008年，隶属于北方民族大学计算机科学与工程学院。每学期两刊，每刊八版，现发行量为每刊1000份，</p>
-<p style="float: left;margin-left: 18%">发行方式以免费赠送为主，面向主体为全校教职工与学生。报纸内容主要包括：时事资讯，IT前沿信息，考证详细介绍，社会热点新</p>
-<p style="float: left;margin-left: 18%">闻，人物采访，征文文章推选，社员文章推送。新闻来源广泛，坚持高格调与可读性相统一的原则，以广视角，真内容、准信息、全</p>
-<p style="float: left;margin-left: 18%">方面、第一时间反映丰富多彩的校园生活为宗旨，是我校颇有影响、颇受读者喜爱的报刊之一。</p>
+<p style="float: left;margin-left: 12%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;《民大IT报》成立于2008年，隶属于北方民族大学计算机科学与工程学院。每学期两刊，每刊八版，现发行量为每刊1000份，</p>
+<p style="float: left;margin-left: 12%">发行方式以免费赠送为主，面向主体为全校教职工与学生。报纸内容主要包括：时事资讯，IT前沿信息，考证详细介绍，社会热点新</p>
+<p style="float: left;margin-left: 12%">闻，人物采访，征文文章推选，社员文章推送。新闻来源广泛，坚持高格调与可读性相统一的原则，以广视角，真内容、准信息、全</p>
+<p style="float: left;margin-left: 12%">方面、第一时间反映丰富多彩的校园生活为宗旨，是我校颇有影响、颇受读者喜爱的报刊之一。</p>
                     </pre>
                 </div>
             </div>
@@ -252,7 +132,7 @@
         <div style="float: right;margin-right: 4px  ">民大IT报</div>
         <div style="height: 5%;">
             <div style="" id="wrap" >
-                <img id="" th:src="@{/image/2.jpg}" alt="Second slide" height="80px" width="80px">
+                <img  th:src="@{/image/2.jpg}" alt="Second slide" height="80px" width="80px">
             </div>
         </div>
 </div>
@@ -351,7 +231,7 @@
                 var html = "";
                 $.each(data, function(i) {
                     hrefs = "getDepartmentByIds?depId="+data[i].depId;
-                    html +="<li><a target=\"_blank\" href='"+hrefs+"'>"+data[i].depName+"</a></li>"
+                    html +="<li><a target=\"_blank\" href='"+hrefs+"' style=\"font-size: 14px\">"+data[i].depName+"</a></li>"
                 });
                 $("#deptMenu").append(html);
             }
