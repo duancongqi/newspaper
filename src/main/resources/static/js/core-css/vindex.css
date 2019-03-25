@@ -71,7 +71,7 @@ a:hover,a:focus{
 .nav-tabs li.active a:hover,
 .nav-tabs li a:hover{
     border: none;
-    background: #1c94c4;
+    background: #F8F9FC;
 }
 .tab .tab-content{
     padding: 30px 15px 20px;
